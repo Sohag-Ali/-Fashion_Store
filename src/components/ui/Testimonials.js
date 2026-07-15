@@ -17,7 +17,7 @@ export default function Testimonials() {
             Client Voices
           </span>
           <p className="text-[clamp(1.5rem,4vw,2.5rem)] font-serif tracking-tight leading-snug md:leading-normal text-balance mx-auto text-foreground mb-12">
-            "An absolute revelation. The attention to detail and the sheer quality of the materials speak of a brand that truly understands the essence of modern luxury."
+            &quot;An absolute revelation. The attention to detail and the sheer quality of the materials speak of a brand that truly understands the essence of modern luxury.&quot;
           </p>
           <div className="flex flex-col items-center gap-2">
             <span className="text-sm font-medium tracking-widest uppercase">Eleanor Vance</span>
