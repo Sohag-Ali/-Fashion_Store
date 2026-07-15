@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, Heart, ShoppingBag, Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Container } from "@/components/layout/Container";
+import { useCart } from "@/context/CartProvider";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -20,6 +21,7 @@ export function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { itemCount } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -127,15 +129,27 @@ export function SiteHeader() {
 
           <ThemeToggle />
 
-          <button
+          <Link
+            href="/cart"
             className="p-2 relative flex items-center text-foreground hover:text-muted-foreground transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-primary group"
             aria-label="Shopping Cart"
           >
             <ShoppingBag strokeWidth={1.5} size={20} />
-            <span className="absolute top-1 right-1 w-4 h-4 bg-primary text-primary-foreground text-[9px] font-bold rounded-full flex items-center justify-center border border-background transition-transform group-hover:scale-110">
-              0
-            </span>
-          </button>
+            <AnimatePresence>
+              {itemCount > 0 && (
+                <motion.span
+                  key={itemCount}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                  className="absolute top-1 right-1 w-4 h-4 bg-primary text-primary-foreground text-[9px] font-bold rounded-full flex items-center justify-center border border-background"
+                >
+                  {itemCount > 9 ? "9+" : itemCount}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </Link>
         </div>
       </Container>
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Heart, Ruler, ShoppingBag, Sparkles } from "lucide-react";
 import { Container } from "@/components/layout/Container";
+import { useCart } from "@/context/CartProvider";
 import { StarRating } from "@/components/ui/StarRating";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { SizeSelector } from "@/components/product/SizeSelector";
@@ -16,6 +17,7 @@ import { ProductReviews } from "@/components/product/ProductReviews";
 import { RelatedProducts } from "@/components/product/RelatedProducts";
 
 export function ProductDetailsView({ product, relatedProducts, reviews }) {
+  const { addItem } = useCart();
   const firstAvailableSize = product.sizes.find((size) => !product.soldOutSizes?.includes(size));
   const [selectedSize, setSelectedSize] = useState(firstAvailableSize ?? product.sizes[0]);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name);
@@ -31,7 +33,10 @@ export function ProductDetailsView({ product, relatedProducts, reviews }) {
       return;
     }
     setAddState("adding");
-    setTimeout(() => setAddState("added"), 500);
+    setTimeout(() => {
+      addItem(product, { size: selectedSize, color: selectedColor, quantity });
+      setAddState("added");
+    }, 500);
     setTimeout(() => setAddState("idle"), 2400);
   }
 
