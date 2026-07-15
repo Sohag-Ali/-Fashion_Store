@@ -3,19 +3,6 @@ import React from "react";
 export default function Home() {
   return (
     <main className="flex-1 flex flex-col bg-background selection:bg-primary selection:text-primary-foreground">
-      {/* Apple-style Frosted Navbar */}
-      <nav className="w-full flex justify-between items-center px-8 py-4 sticky top-0 z-50 bg-background/70 backdrop-blur-md border-b border-border/50">
-        <div className="font-serif text-2xl tracking-tighter">Luxe.</div>
-        <div className="hidden md:flex gap-10 text-xs font-medium text-muted-foreground uppercase tracking-widest">
-          <a href="#" className="hover:text-foreground transition-colors duration-300">Women</a>
-          <a href="#" className="hover:text-foreground transition-colors duration-300">Men</a>
-          <a href="#" className="hover:text-foreground transition-colors duration-300">Objects</a>
-        </div>
-        <div className="flex gap-6">
-          <button className="text-xs font-medium uppercase tracking-widest hover:text-muted-foreground transition-colors duration-300">Search</button>
-          <button className="text-xs font-medium uppercase tracking-widest hover:text-muted-foreground transition-colors duration-300">Cart (0)</button>
-        </div>
-      </nav>
 
       {/* Hero Section with Fluid Typography */}
       <section className="relative w-full h-[85vh] bg-card flex flex-col items-center justify-center overflow-hidden">
