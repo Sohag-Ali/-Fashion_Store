@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 export default function ProductGrid({ title, subtitle, products = [], linkText = "View All", linkHref = "#" }) {
@@ -44,35 +45,40 @@ function ProductCard({ product, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className="group cursor-pointer flex flex-col"
+      className="group flex flex-col"
     >
-      <div className="aspect-[3/4] bg-muted relative overflow-hidden mb-6">
-        <img 
-          src={product.image} 
-          alt={product.title} 
-          className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110 ease-out" 
-        />
-        <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        
-        {/* Quick Add Button */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-          <button className="px-8 py-3 bg-white text-black text-xs font-semibold tracking-widest uppercase rounded-full hover:bg-black hover:text-white transition-colors duration-300 shadow-xl">
-            Quick Add
-          </button>
+      <Link href={`/products/${product.id}`} className="cursor-pointer flex flex-col">
+        <div className="aspect-[3/4] bg-muted relative overflow-hidden mb-6">
+          <img
+            src={product.image}
+            alt={product.title}
+            className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110 ease-out"
+          />
+          <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+          {/* Quick Add Button */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+            <button
+              onClick={(e) => e.preventDefault()}
+              className="px-8 py-3 bg-white text-black text-xs font-semibold tracking-widest uppercase rounded-full hover:bg-black hover:text-white transition-colors duration-300 shadow-xl"
+            >
+              Quick Add
+            </button>
+          </div>
         </div>
-      </div>
-      
-      <div className="flex justify-between items-start pt-2 px-1">
-        <div className="flex flex-col">
-          <h3 className="font-serif text-xl tracking-tight group-hover:text-black/70 dark:group-hover:text-white/70 transition-colors">
-            {product.title}
-          </h3>
-          <p className="text-xs text-muted-foreground uppercase tracking-[0.15em] mt-2">
-            {product.category}
-          </p>
+
+        <div className="flex justify-between items-start pt-2 px-1">
+          <div className="flex flex-col">
+            <h3 className="font-serif text-xl tracking-tight group-hover:text-black/70 dark:group-hover:text-white/70 transition-colors">
+              {product.title}
+            </h3>
+            <p className="text-xs text-muted-foreground uppercase tracking-[0.15em] mt-2">
+              {product.category}
+            </p>
+          </div>
+          <p className="font-medium text-sm tabular-nums tracking-wider">{product.price}</p>
         </div>
-        <p className="font-medium text-sm tabular-nums tracking-wider">{product.price}</p>
-      </div>
+      </Link>
     </motion.div>
   );
 }
