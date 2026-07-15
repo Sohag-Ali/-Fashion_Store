@@ -1,6 +1,7 @@
 import { Geist, Playfair_Display } from "next/font/google";
 import { ThemeProvider } from "@/context/ThemeProvider";
 import { CartProvider } from "@/context/CartProvider";
+import { WishlistProvider } from "@/context/WishlistProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -51,7 +52,9 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <CartProvider>{children}</CartProvider>
+          <CartProvider>
+            <WishlistProvider>{children}</WishlistProvider>
+          </CartProvider>
         </ThemeProvider>
       </body>
     </html>

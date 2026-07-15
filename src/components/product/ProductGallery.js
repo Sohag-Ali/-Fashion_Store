@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -38,7 +39,7 @@ export function ProductGallery({ images, title }) {
                 : "border-foreground/10 hover:border-foreground/40"
             )}
           >
-            <img src={image} alt="" className="w-full h-full object-cover" />
+            <Image src={image} alt="" fill sizes="80px" className="object-cover" />
             {activeIndex === index && (
               <motion.div
                 layoutId="galleryActiveThumb"
@@ -53,17 +54,24 @@ export function ProductGallery({ images, title }) {
       {/* Main image */}
       <div className="relative flex-1 aspect-[4/5] bg-muted overflow-hidden group">
         <AnimatePresence initial={false} custom={direction} mode="wait">
-          <motion.img
+          <motion.div
             key={activeIndex}
-            src={images[activeIndex]}
-            alt={`${title} — view ${activeIndex + 1}`}
             custom={direction}
             initial={{ opacity: 0, x: direction >= 0 ? 40 : -40 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: direction >= 0 ? -40 : 40 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
-          />
+            className="absolute inset-0"
+          >
+            <Image
+              src={images[activeIndex]}
+              alt={`${title} — view ${activeIndex + 1}`}
+              fill
+              priority={activeIndex === 0}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
+            />
+          </motion.div>
         </AnimatePresence>
 
         <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-background/70 backdrop-blur-sm text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">

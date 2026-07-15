@@ -1,16 +1,41 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
-import Link from "next/link";
+import React, { Suspense, useState, useMemo, useEffect } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, SlidersHorizontal, ChevronDown } from "lucide-react";
 import { productsData, categoriesList } from "@/lib/dummyData";
+import { ProductCard } from "@/components/product/ProductCard";
 
 export default function ProductsPage() {
+  return (
+    <Suspense fallback={null}>
+      <ProductsPageContent />
+    </Suspense>
+  );
+}
+
+function ProductsPageContent() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState(searchParams.get("category") ?? "All");
   const [sortOrder, setSortOrder] = useState("Newest");
   const [isLoading, setIsLoading] = useState(true);
+
+  function handleCategoryChange(category) {
+    setSelectedCategory(category);
+    const params = new URLSearchParams(searchParams.toString());
+    if (category === "All") {
+      params.delete("category");
+    } else {
+      params.set("category", category);
+    }
+    const query = params.toString();
+    router.replace(`${pathname}${query ? `?${query}` : ""}`, { scroll: false });
+  }
 
   // Simulate network request
   useEffect(() => {
@@ -89,7 +114,7 @@ export default function ProductsPage() {
             {categoriesList.map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => handleCategoryChange(category)}
                 className={`text-xs uppercase tracking-[0.15em] whitespace-nowrap transition-all duration-300 ${
                   selectedCategory === category 
                     ? "text-foreground font-semibold border-b border-foreground pb-1" 
@@ -104,10 +129,12 @@ export default function ProductsPage() {
           <div className="flex flex-col sm:flex-row items-center gap-6 w-full xl:w-auto">
             {/* Search */}
             <div className="relative group w-full sm:w-64">
+              <label htmlFor="product-search" className="sr-only">Search products</label>
               <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-foreground transition-colors" />
-              <input 
-                type="text" 
-                placeholder="Search pieces..." 
+              <input
+                id="product-search"
+                type="text"
+                placeholder="Search pieces..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-transparent border-b border-foreground/20 py-2 pl-8 pr-4 text-sm focus:outline-none focus:border-foreground transition-colors"
@@ -158,10 +185,10 @@ export default function ProductsPage() {
               <p className="text-muted-foreground text-sm max-w-md">
                 We could not find any pieces matching your current filters. Try adjusting your search or category selection.
               </p>
-              <button 
+              <button
                 onClick={() => {
                   setSearchQuery("");
-                  setSelectedCategory("All");
+                  handleCategoryChange("All");
                 }}
                 className="mt-8 px-8 py-3 border border-foreground text-xs uppercase tracking-widest hover:bg-foreground hover:text-background transition-colors duration-300"
               >
@@ -183,51 +210,5 @@ export default function ProductsPage() {
         </div>
       </div>
     </main>
-  );
-}
-
-function ProductCard({ product, index }) {
-  return (
-    <motion.div 
-      layout
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.6, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-      className="group flex flex-col"
-    >
-      <Link href={`/products/${product.id}`} className="cursor-pointer flex flex-col">
-        <div className="aspect-[3/4] bg-muted relative overflow-hidden mb-6">
-          <img
-            src={product.image}
-            alt={product.title}
-            className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110 ease-out"
-          />
-          <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-          {/* Quick Add Button */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-            <button
-              onClick={(e) => e.preventDefault()}
-              className="px-8 py-3 bg-white text-black text-xs font-semibold tracking-widest uppercase rounded-full hover:bg-black hover:text-white transition-colors duration-300 shadow-xl"
-            >
-              Quick Add
-            </button>
-          </div>
-        </div>
-
-        <div className="flex justify-between items-start pt-2 px-1">
-          <div className="flex flex-col">
-            <h3 className="font-serif text-xl tracking-tight group-hover:text-black/70 dark:group-hover:text-white/70 transition-colors">
-              {product.title}
-            </h3>
-            <p className="text-xs text-muted-foreground uppercase tracking-[0.15em] mt-2">
-              {product.category}
-            </p>
-          </div>
-          <p className="font-medium text-sm tabular-nums tracking-wider">{product.priceFormatted}</p>
-        </div>
-      </Link>
-    </motion.div>
   );
 }

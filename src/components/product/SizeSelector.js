@@ -6,13 +6,10 @@ import { cn } from "@/lib/utils";
 export function SizeSelector({ sizes, soldOutSizes = [], selected, onSelect }) {
   return (
     <div>
-      <div className="flex items-center justify-between mb-3">
+      <div className="mb-3">
         <span className="text-xs uppercase tracking-[0.15em] font-medium">
           Size {selected && <span className="text-muted-foreground normal-case tracking-normal">— {selected}</span>}
         </span>
-        <button className="text-xs text-muted-foreground uppercase tracking-widest underline underline-offset-4 hover:text-foreground transition-colors">
-          Size Guide
-        </button>
       </div>
       <div className="flex flex-wrap gap-2">
         {sizes.map((size) => {

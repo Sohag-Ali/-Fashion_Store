@@ -89,8 +89,12 @@ export function OrderSummary({ subtotal, itemCount, onCheckoutSuccess }) {
 
       {!appliedCoupon && (
         <form onSubmit={handleApplyCoupon} className="mb-6">
+          <label htmlFor="coupon-code" className="sr-only">
+            Coupon code
+          </label>
           <div className="flex items-stretch border border-foreground/20 focus-within:border-foreground transition-colors">
             <input
+              id="coupon-code"
               type="text"
               value={couponInput}
               onChange={(e) => {

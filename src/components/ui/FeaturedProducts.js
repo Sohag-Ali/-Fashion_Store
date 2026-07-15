@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function FeaturedProducts() {
@@ -49,13 +51,13 @@ export default function FeaturedProducts() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <a 
-              href="#" 
+            <Link
+              href="/products"
               className="inline-flex items-center gap-4 text-xs font-semibold tracking-[0.2em] uppercase pb-3 border-b border-white/30 hover:border-white transition-colors duration-500 group w-fit"
             >
               Explore Collection
               <span className="group-hover:translate-x-2 transition-transform duration-500 ease-out">→</span>
-            </a>
+            </Link>
           </motion.div>
         </div>
 
@@ -64,10 +66,12 @@ export default function FeaturedProducts() {
             style={{ y }}
             className="absolute right-0 top-0 w-[80%] h-[90%] bg-white/5"
           >
-            <img 
-              src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=2012&auto=format&fit=crop" 
-              alt="Featured Footwear" 
-              className="w-full h-full object-cover"
+            <Image
+              src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=2012&auto=format&fit=crop"
+              alt="Featured Footwear"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
             />
           </motion.div>
           
@@ -78,10 +82,12 @@ export default function FeaturedProducts() {
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="absolute left-0 bottom-12 lg:bottom-24 w-[50%] h-[40%] bg-neutral-800 p-2 shadow-2xl border border-white/10"
           >
-            <img 
-              src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1974&auto=format&fit=crop" 
-              alt="Detail Shot" 
-              className="w-full h-full object-cover"
+            <Image
+              src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1974&auto=format&fit=crop"
+              alt="Detail Shot"
+              fill
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-cover"
             />
           </motion.div>
         </div>

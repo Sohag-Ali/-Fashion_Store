@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function HeroSection() {
   const containerRef = useRef(null);
@@ -27,10 +29,13 @@ export default function HeroSection() {
         className="absolute inset-0 w-full h-full origin-bottom"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 z-10" />
-        <img 
-          src="https://images.unsplash.com/photo-1509319117193-57bab727e09d?q=80&w=2400&auto=format&fit=crop" 
-          alt="Luxury Fashion Hero" 
-          className="w-full h-full object-cover"
+        <Image
+          src="https://images.unsplash.com/photo-1509319117193-57bab727e09d?q=80&w=2400&auto=format&fit=crop"
+          alt="Luxury Fashion Hero"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
       </motion.div>
 
@@ -70,7 +75,10 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mt-16 flex flex-col sm:flex-row items-center gap-8"
         >
-          <button className="group relative px-8 py-5 bg-white text-black rounded-full overflow-hidden flex items-center gap-4 transition-transform hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.3)]">
+          <Link
+            href="/products"
+            className="group relative px-8 py-5 bg-white text-black rounded-full overflow-hidden flex items-center gap-4 transition-transform hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.3)]"
+          >
             <span className="relative z-10 text-xs font-semibold tracking-[0.2em] uppercase">
               Discover Collection
             </span>
@@ -78,14 +86,7 @@ export default function HeroSection() {
               <ArrowRight size={18} />
             </div>
             <div className="absolute inset-0 bg-neutral-200 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-          </button>
-
-          <button className="flex items-center gap-5 text-white hover:text-white/80 transition-all duration-300 group hover:scale-105">
-            <div className="w-16 h-16 rounded-full border border-white/30 flex items-center justify-center backdrop-blur-md group-hover:border-white group-hover:bg-white/10 transition-all duration-300">
-              <Play size={20} className="ml-1" fill="currentColor" />
-            </div>
-            <span className="text-xs tracking-[0.2em] uppercase font-semibold">Watch Film</span>
-          </button>
+          </Link>
         </motion.div>
       </motion.div>
 
@@ -153,14 +154,19 @@ function FloatingCard({ image, title, price, delay, offset = "", fullWidth = fal
       initial={{ opacity: 0, x: fullWidth ? 0 : 50, y: fullWidth ? 50 : 0 }}
       animate={{ opacity: 1, x: 0, y: 0 }}
       transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative group bg-white/5 backdrop-blur-2xl border border-white/10 p-3 rounded-2xl ${fullWidth ? 'w-full max-w-sm' : 'w-[280px]'} cursor-pointer hover:bg-white/10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:-translate-y-2 ${offset}`}
+      className={`relative ${fullWidth ? 'w-full max-w-sm' : 'w-[280px]'} ${offset}`}
     >
-      <div className="flex gap-5 items-center">
+      <Link
+        href="/products"
+        className={`group flex gap-5 items-center bg-white/5 backdrop-blur-2xl border border-white/10 p-3 rounded-2xl cursor-pointer hover:bg-white/10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:-translate-y-2`}
+      >
         <div className="w-20 h-20 rounded-xl overflow-hidden relative shrink-0">
-          <img 
-            src={image} 
+          <Image
+            src={image}
             alt={title}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+            fill
+            sizes="(max-width: 768px) 40vw, 220px"
+            className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
           />
           <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
         </div>
@@ -171,7 +177,7 @@ function FloatingCard({ image, title, price, delay, offset = "", fullWidth = fal
         <div className="ml-auto w-8 h-8 rounded-full border border-white/20 flex items-center justify-center mr-2 group-hover:bg-white group-hover:text-black transition-colors duration-300">
            <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
         </div>
-      </div>
+      </Link>
     </motion.div>
   );
 }

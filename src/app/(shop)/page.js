@@ -10,23 +10,18 @@ import Footer from "@/components/layout/Footer";
 import { productsData } from "@/lib/dummyData";
 
 export default function Home() {
-  const newArrivals = productsData.slice(0, 3).map((product) => ({
-    id: product.id,
-    title: product.title,
-    category: product.category,
-    price: product.priceFormatted,
-    image: product.image,
-  }));
+  const newArrivals = productsData.slice(0, 3);
 
   return (
     <main className="flex-1 flex flex-col bg-background selection:bg-primary selection:text-primary-foreground">
       <HeroSection />
       <Categories />
-      <ProductGrid 
-        title="New Arrivals" 
-        subtitle="Latest Additions" 
-        products={newArrivals} 
-        linkText="View All Pieces" 
+      <ProductGrid
+        title="New Arrivals"
+        subtitle="Latest Additions"
+        products={newArrivals}
+        linkText="View All Pieces"
+        linkHref="/products"
       />
       <WhyChooseUs />
       <FeaturedProducts />

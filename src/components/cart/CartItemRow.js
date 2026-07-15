@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import { QuantitySelector } from "@/components/product/QuantitySelector";
@@ -17,8 +18,8 @@ export function CartItemRow({ item, onUpdateQuantity, onRemove }) {
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className="flex gap-5 sm:gap-8 py-8 border-b border-foreground/10"
     >
-      <Link href={`/products/${item.id}`} className="shrink-0 w-24 sm:w-32 aspect-[3/4] bg-muted overflow-hidden">
-        <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+      <Link href={`/products/${item.id}`} className="relative shrink-0 w-24 sm:w-32 aspect-[3/4] bg-muted overflow-hidden">
+        <Image src={item.image} alt={item.title} fill sizes="128px" className="object-cover" />
       </Link>
 
       <div className="flex-1 flex flex-col justify-between min-w-0">

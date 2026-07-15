@@ -2,26 +2,30 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Heart, ShoppingBag, Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Container } from "@/components/layout/Container";
 import { useCart } from "@/context/CartProvider";
+import { useWishlist } from "@/context/WishlistProvider";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { name: "Women", href: "/categories/women" },
-  { name: "Men", href: "/categories/men" },
-  { name: "Objects", href: "/categories/objects" },
-  { name: "Editorial", href: "/editorial" },
+  { name: "Outerwear", href: "/products?category=Outerwear" },
+  { name: "Dresses", href: "/products?category=Dresses" },
+  { name: "Accessories", href: "/products?category=Accessories" },
+  { name: "Shoes", href: "/products?category=Shoes" },
 ];
 
 export function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentUrl = `${pathname}${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
   const { itemCount } = useCart();
+  const { itemCount: wishlistCount } = useWishlist();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,7 +76,7 @@ export function SiteHeader() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex flex-1 items-center gap-8">
           {NAV_LINKS.map((link) => {
-            const isActive = pathname === link.href;
+            const isActive = currentUrl === link.href;
             return (
               <Link
                 key={link.name}
@@ -113,19 +117,35 @@ export function SiteHeader() {
 
         {/* Icons & Actions */}
         <div className="flex-1 flex items-center justify-end gap-2 md:gap-4">
-          <button
+          <Link
+            href="/products"
             className="p-2 hidden md:flex text-foreground hover:text-muted-foreground transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-primary"
-            aria-label="Search"
+            aria-label="Search products"
           >
             <Search strokeWidth={1.5} size={20} />
-          </button>
-          
-          <button
-            className="p-2 hidden md:flex text-foreground hover:text-muted-foreground transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-primary"
+          </Link>
+
+          <Link
+            href="/wishlist"
+            className="p-2 relative hidden md:flex text-foreground hover:text-muted-foreground transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-primary"
             aria-label="Wishlist"
           >
             <Heart strokeWidth={1.5} size={20} />
-          </button>
+            <AnimatePresence>
+              {wishlistCount > 0 && (
+                <motion.span
+                  key={wishlistCount}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                  className="absolute top-1 right-1 w-4 h-4 bg-primary text-primary-foreground text-[9px] font-bold rounded-full flex items-center justify-center border border-background"
+                >
+                  {wishlistCount > 9 ? "9+" : wishlistCount}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </Link>
 
           <ThemeToggle />
 
@@ -190,7 +210,7 @@ export function SiteHeader() {
                       href={link.href}
                       className={cn(
                         "text-lg font-medium uppercase tracking-wider transition-colors",
-                        pathname === link.href ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                        currentUrl === link.href ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                       )}
                     >
                       {link.name}
@@ -201,14 +221,21 @@ export function SiteHeader() {
                 <div className="w-full h-px bg-border my-2" />
 
                 <div className="flex flex-col gap-6">
-                  <button className="flex items-center gap-4 text-sm font-medium uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">
+                  <Link
+                    href="/products"
+                    className="flex items-center gap-4 text-sm font-medium uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+                  >
                     <Search strokeWidth={1.5} size={20} />
                     Search
-                  </button>
-                  <button className="flex items-center gap-4 text-sm font-medium uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">
+                  </Link>
+                  <Link
+                    href="/wishlist"
+                    className="flex items-center gap-4 text-sm font-medium uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+                  >
                     <Heart strokeWidth={1.5} size={20} />
                     Wishlist
-                  </button>
+                    {wishlistCount > 0 && <span className="text-xs text-foreground">({wishlistCount})</span>}
+                  </Link>
                 </div>
               </div>
             </motion.div>

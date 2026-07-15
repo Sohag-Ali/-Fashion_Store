@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Check, Heart, Ruler, ShoppingBag, Sparkles } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { useCart } from "@/context/CartProvider";
+import { useWishlist } from "@/context/WishlistProvider";
 import { StarRating } from "@/components/ui/StarRating";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { SizeSelector } from "@/components/product/SizeSelector";
@@ -18,12 +19,14 @@ import { RelatedProducts } from "@/components/product/RelatedProducts";
 
 export function ProductDetailsView({ product, relatedProducts, reviews }) {
   const { addItem } = useCart();
+  const { toggleItem, isWishlisted } = useWishlist();
   const firstAvailableSize = product.sizes.find((size) => !product.soldOutSizes?.includes(size));
   const [selectedSize, setSelectedSize] = useState(firstAvailableSize ?? product.sizes[0]);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name);
   const [quantity, setQuantity] = useState(1);
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const [addState, setAddState] = useState("idle"); // idle | adding | added
+
+  const wishlisted = isWishlisted(product.id);
   const [showSizeWarning, setShowSizeWarning] = useState(false);
 
   function handleAddToCart() {
@@ -191,16 +194,16 @@ export function ProductDetailsView({ product, relatedProducts, reviews }) {
               </motion.button>
 
               <button
-                onClick={() => setIsWishlisted((value) => !value)}
-                aria-label="Add to wishlist"
-                aria-pressed={isWishlisted}
+                onClick={() => toggleItem(product)}
+                aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
+                aria-pressed={wishlisted}
                 className="w-14 h-14 shrink-0 flex items-center justify-center border border-foreground/20 hover:border-foreground transition-colors duration-300"
               >
-                <motion.span animate={{ scale: isWishlisted ? [1, 1.3, 1] : 1 }} transition={{ duration: 0.35 }}>
+                <motion.span animate={{ scale: wishlisted ? [1, 1.3, 1] : 1 }} transition={{ duration: 0.35 }}>
                   <Heart
                     size={18}
                     strokeWidth={1.5}
-                    className={isWishlisted ? "fill-foreground text-foreground" : "text-foreground"}
+                    className={wishlisted ? "fill-foreground text-foreground" : "text-foreground"}
                   />
                 </motion.span>
               </button>

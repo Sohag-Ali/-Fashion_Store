@@ -71,10 +71,6 @@ export function ProductReviews({ rating, reviewCount, reviews }) {
               );
             })}
           </div>
-
-          <button className="mt-8 px-8 py-3 border border-foreground text-xs uppercase tracking-widest hover:bg-foreground hover:text-background transition-colors duration-300 w-full lg:w-auto">
-            Write a Review
-          </button>
         </div>
 
         {/* Review list */}
