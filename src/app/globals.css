@@ -1,5 +1,135 @@
 @import "tailwindcss";
 
- @plugin "daisyui" {
-   themes: light --default;
- }
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+  
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Apple-inspired multi-layered shadow */
+  --shadow-luxury: 0px 4px 24px -1px rgba(0, 0, 0, 0.04), 0px 2px 8px -1px rgba(0, 0, 0, 0.04);
+}
+
+@layer base {
+  :root {
+    /* Apple Light Mode - Avoiding Halation */
+    /* Extremely subtle warm gray background instead of pure white */
+    --background: 0 0% 98%; 
+    /* Soft black for text, easier on eyes */
+    --foreground: 0 0% 11%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 11%;
+    
+    /* Primary is soft black */
+    --primary: 0 0% 11%; 
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 0 0% 96%; 
+    --secondary-foreground: 0 0% 11%;
+    
+    /* Apple gray */
+    --muted: 240 5% 96%; 
+    --muted-foreground: 240 4% 46%;
+    
+    --accent: 0 0% 96%; 
+    --accent-foreground: 0 0% 11%;
+    
+    --destructive: 0 84.2% 60.2%; 
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Delicate borders */
+    --border: 0 0% 90%; 
+    --input: 0 0% 90%;
+    
+    --ring: 0 0% 11%;
+    
+    /* Subtle squircle base */
+    --radius: 0.25rem;
+  }
+
+  .dark {
+    /* Pure OLED Black for backgrounds */
+    --background: 0 0% 0%; 
+    /* Soft white for text */
+    --foreground: 0 0% 96%;
+    
+    /* Slightly elevated surface */
+    --card: 240 5% 11%;
+    --card-foreground: 0 0% 96%;
+    
+    --popover: 240 5% 11%;
+    --popover-foreground: 0 0% 96%;
+    
+    --primary: 0 0% 96%; 
+    --primary-foreground: 0 0% 11%;
+    
+    --secondary: 240 5% 16%; 
+    --secondary-foreground: 0 0% 96%;
+    
+    --muted: 240 5% 16%;
+    --muted-foreground: 240 5% 65%;
+    
+    --accent: 240 5% 16%;
+    --accent-foreground: 0 0% 96%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 240 5% 16%;
+    --input: 240 5% 16%;
+    
+    --ring: 0 0% 96%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  /* Fluid typography utilities via clamp */
+  .text-fluid-hero {
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 1.1;
+  }
+  .text-fluid-h2 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.2;
+  }
+}
