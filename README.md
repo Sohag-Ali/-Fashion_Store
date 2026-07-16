@@ -1,36 +1,221 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Luxe – Premium Fashion E-commerce
+
+A modern luxury fashion e-commerce frontend built with **Next.js 15**, **Tailwind CSS**, and **Framer Motion**. This project was developed as a frontend interview task, focusing on clean architecture, premium UI/UX, responsive design, and scalable component structure.
+
+> Inspired by luxury fashion brands like Zara, COS, and Massimo Dutti.
+
+---
+
+## Live Demo
+
+🔗 Live Site: [https://your-live-url.vercel.app](https://your-live-url.vercel.app)
+
+## GitHub Repository
+
+🔗 [https://github.com/your-username/luxe-fashion](https://github.com/your-username/luxe-fashion)
+
+---
+
+## Project Overview
+
+Luxe is a frontend-only fashion e-commerce application designed to simulate a real shopping experience using local dummy data. The application emphasizes elegant design, reusable components, and production-ready frontend architecture.
+
+The project includes:
+
+- Modern luxury homepage
+- Dynamic product listing
+- Product details page
+- Shopping cart
+- Category filtering
+- Search & sorting
+- Sale collection
+- New arrivals
+- Responsive design
+- Smooth animations
+
+---
+
+## Features
+
+### Premium UI/UX
+
+- Luxury fashion-inspired interface
+- Fully responsive layout
+- Smooth page transitions
+- Modern typography
+- Dark & Light theme
+- Elegant animations with Framer Motion
+
+### Product Management
+
+- Dynamic local product data
+- 40+ fashion products
+- Product details page
+- Related products
+- Featured products
+- New arrivals
+- Sale products
+
+### Shop Experience
+
+- Search products
+- Category filtering
+- Product sorting
+- Pagination
+- Skeleton loading
+- Empty states
+
+### Shopping Cart
+
+- Add to cart
+- Remove from cart
+- Quantity update
+- Order summary
+- Local state management
+
+---
+
+## Pages
+
+- Home
+- Shop
+- Product Details
+- Collections
+- Sale
+- Cart
+- Wishlist
+
+---
+
+## Tech Stack
+
+### Frontend
+
+- Next.js 15 (App Router)
+- React
+- Tailwind CSS
+- Framer Motion
+
+### Icons
+
+- Lucide React
+
+### State Management
+
+- React Context API
+
+### Styling
+
+- Tailwind CSS
+- CSS Variables
+
+---
+
+## Folder Structure
+
+```text
+src/
+│
+├── app/
+│   └── (shop)/          # Route group: home, products, collections, sale, cart, wishlist
+│
+├── components/
+│   ├── cart/            # Cart page components
+│   ├── collections/     # Collections page components
+│   ├── home/            # Homepage sections (hero, categories, testimonials, etc.)
+│   ├── layout/           # Header, footer, navigation, drawers
+│   ├── product/         # Product card, gallery, details, grid
+│   ├── sale/             # Sale page components
+│   ├── shop/             # Product listing filters
+│   └── ui/                # Generic reusable primitives (pagination, star rating, theme toggle)
+│
+├── context/              # React Context providers (cart, wishlist, theme)
+├── data/                 # Local dummy data (products, categories)
+└── lib/                  # Data-access helpers and utilities
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
+Clone the repository
+
+```bash
+git clone https://github.com/your-username/luxe-fashion.git
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build for production
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Design Philosophy
 
-To learn more about Next.js, take a look at the following resources:
+The interface follows a minimal luxury design system inspired by modern fashion brands.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Focus areas:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Clean typography
+- Spacious layouts
+- Elegant color palette
+- Consistent spacing
+- Accessible UI
+- Component reusability
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Performance
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Optimized images
+- Lazy loading
+- Component-based architecture
+- Responsive design
+- Reusable utilities
+
+---
+
+## Future Improvements
+
+- Authentication
+- Wishlist persistence
+- Payment integration
+- Backend API
+- User profile
+- Order history
+- Product reviews
+- Admin dashboard
+
+---
+
+## Author
+
+### Sohag Ali
+
+Frontend Developer
+
+GitHub: [https://github.com/Sohag-Ali](https://github.com/Sohag-Ali)
+
+LinkedIn: [https://linkedin.com/in/sohag-ali-bd](https://linkedin.com/in/sohag-ali-bd)
+
+Portfolio: [https://portfolio-sohag-ali.vercel.app](https://portfolio-sohag-ali.vercel.app)
+
+---
+
+## License
+
+This project was created for educational and interview purposes.
