@@ -47,7 +47,7 @@ export function SaleFilters({ minDiscount, onMinDiscountChange, sortKey, onSortC
           <select
             value={sortKey}
             onChange={(e) => onSortChange(e.target.value)}
-            className="w-full sm:w-auto appearance-none bg-transparent border border-foreground/20 px-6 py-2.5 pr-12 text-xs uppercase tracking-widest cursor-pointer focus:outline-none focus:border-foreground transition-colors hover:border-foreground/50 rounded-none"
+            className="w-full sm:w-auto appearance-none bg-background border border-foreground/20 px-6 py-2.5 pr-12 text-xs uppercase tracking-widest cursor-pointer focus:outline-none focus:border-foreground transition-colors hover:border-foreground/50 rounded-none"
           >
             {SORT_ORDER.map((key) => (
               <option key={key} value={key}>
