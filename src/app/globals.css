@@ -31,6 +31,17 @@
 
   /* Apple-inspired multi-layered shadow */
   --shadow-luxury: 0px 4px 24px -1px rgba(0, 0, 0, 0.04), 0px 2px 8px -1px rgba(0, 0, 0, 0.04);
+
+  --animate-shimmer: shimmer 2.2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 150% 0;
+  }
+  100% {
+    background-position: -150% 0;
+  }
 }
 
 @layer base {
@@ -122,6 +133,19 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  /* Shimmer sweep for skeleton loaders — one shared gradient + animation so
+     every placeholder block in a skeleton animates in visual sync. */
+  .shimmer {
+    background-image: linear-gradient(
+      100deg,
+      hsl(var(--muted)) 20%,
+      hsl(var(--muted-foreground) / 0.16) 40%,
+      hsl(var(--muted-foreground) / 0.16) 60%,
+      hsl(var(--muted)) 80%
+    );
+    background-size: 250% 100%;
+    animation: var(--animate-shimmer);
   }
   /* Fluid typography utilities via clamp */
   .text-fluid-hero {

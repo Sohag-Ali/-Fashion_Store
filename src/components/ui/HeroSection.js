@@ -96,13 +96,13 @@ export default function HeroSection() {
         className="absolute z-30 bottom-24 right-12 hidden lg:flex flex-col gap-6 perspective-1000"
       >
         <FloatingCard 
-          image="https://images.unsplash.com/photo-1591557304169-2fb0d5a3501a?q=80&w=1000&auto=format&fit=crop"
+          image="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=80"
           title="Silk Evening Gown"
           price="$1,290"
           delay={0.8}
         />
         <FloatingCard 
-          image="https://images.unsplash.com/photo-1594938298596-73346c1b5948?q=80&w=1160&auto=format&fit=crop"
+          image="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
           title="Leather Tote"
           price="$850"
           delay={1.0}

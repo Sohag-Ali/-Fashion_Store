@@ -8,6 +8,7 @@ import { Check, Heart } from "lucide-react";
 import { useCart } from "@/context/CartProvider";
 import { useWishlist } from "@/context/WishlistProvider";
 import { getFinalPrice } from "@/lib/products";
+import { StarRating } from "@/components/ui/StarRating";
 import { cn, formatPrice } from "@/lib/utils";
 
 export function ProductCard({ product, size = "default", showQuickAdd = true, index = 0 }) {
@@ -149,6 +150,10 @@ export function ProductCard({ product, size = "default", showQuickAdd = true, in
             >
               {product.brand}
             </p>
+            <div className="flex items-center gap-1.5 mt-2">
+              <StarRating rating={product.rating} size={isCompact ? 11 : 12} />
+              <span className="text-[11px] text-muted-foreground tabular-nums">({product.reviewCount})</span>
+            </div>
           </div>
           <div className="flex flex-col items-end shrink-0 pl-3">
             <p className="font-medium text-sm tabular-nums tracking-wider">{formatPrice(finalPrice)}</p>

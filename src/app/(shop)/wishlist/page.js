@@ -7,6 +7,7 @@ import { Heart } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { useWishlist } from "@/context/WishlistProvider";
 import { ProductCard } from "@/components/product/ProductCard";
+import { ProductCardSkeletonGrid } from "@/components/product/ProductCardSkeleton";
 
 export default function WishlistPage() {
   const { items, isHydrated, itemCount } = useWishlist();
@@ -42,20 +43,7 @@ export default function WishlistPage() {
         </motion.div>
 
         {!isHydrated ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[clamp(2rem,5vw,4rem)] animate-pulse">
-            {[1, 2, 3].map((n) => (
-              <div key={n} className="flex flex-col">
-                <div className="aspect-[3/4] bg-muted mb-6 w-full" />
-                <div className="flex justify-between items-start pt-2 px-1">
-                  <div className="flex flex-col gap-2 w-1/2">
-                    <div className="h-4 bg-muted w-full" />
-                    <div className="h-3 bg-muted w-1/2" />
-                  </div>
-                  <div className="h-4 bg-muted w-16" />
-                </div>
-              </div>
-            ))}
-          </div>
+          <ProductCardSkeletonGrid count={3} />
         ) : items.length === 0 ? (
           <motion.div
             initial={{ opacity: 0, y: 20 }}

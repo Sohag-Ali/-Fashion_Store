@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useState, useMemo, useEffect } from "react";
+import React, { Suspense, useState, useMemo, useEffect, useRef } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { SlidersHorizontal } from "lucide-react";
@@ -16,7 +16,11 @@ import {
   SORT_OPTIONS,
 } from "@/lib/products";
 import { ProductCard } from "@/components/product/ProductCard";
+import { ProductCardSkeletonGrid } from "@/components/product/ProductCardSkeleton";
 import { ShopFilters } from "@/components/shop/ShopFilters";
+import { Pagination } from "@/components/ui/Pagination";
+
+const PRODUCTS_PER_PAGE = 12;
 
 export default function ProductsPage() {
   return (
@@ -44,6 +48,10 @@ function ProductsPageContent() {
     max: searchParams.get("maxPrice") ? Number(searchParams.get("maxPrice")) : catalogBounds.max,
   });
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(() => {
+    const parsed = parseInt(searchParams.get("page"), 10);
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
+  });
 
   // Entry-point filters driven by navbar links (New Arrivals / Best Sellers /
   // Sale) rather than the in-page filter bar, so they stay in effect
@@ -91,32 +99,42 @@ function ProductsPageContent() {
     router.replace(`${pathname}${query ? `?${query}` : ""}`, { scroll: false });
   }
 
+  // Every filter change also resets pagination back to page 1, in the same
+  // syncParams call that applies the filter — folding both into one URL
+  // replace avoids a race between two independent replace calls each
+  // reading a possibly-stale searchParams snapshot.
   function handleCategoryChange(category) {
     setSelectedCategory(category);
     setSelectedSubCategory("all");
-    syncParams({ category, subCategory: null });
+    setCurrentPage(1);
+    syncParams({ category, subCategory: null, page: null });
   }
 
   function handleSubCategoryChange(subCategory) {
     setSelectedSubCategory(subCategory);
-    syncParams({ subCategory });
+    setCurrentPage(1);
+    syncParams({ subCategory, page: null });
   }
 
   function handleSearchChange(value) {
     setSearchQuery(value);
-    syncParams({ q: value });
+    setCurrentPage(1);
+    syncParams({ q: value, page: null });
   }
 
   function handleSortChange(value) {
     setSortKey(value);
-    syncParams({ sort: value === SORT_OPTIONS.NEWEST ? null : value });
+    setCurrentPage(1);
+    syncParams({ sort: value === SORT_OPTIONS.NEWEST ? null : value, page: null });
   }
 
   function handlePriceChange(range) {
     setPriceRange(range);
+    setCurrentPage(1);
     syncParams({
       minPrice: range.min !== catalogBounds.min ? range.min : null,
       maxPrice: range.max !== catalogBounds.max ? range.max : null,
+      page: null,
     });
   }
 
@@ -126,6 +144,7 @@ function ProductsPageContent() {
     setSelectedSubCategory("all");
     setSortKey(SORT_OPTIONS.NEWEST);
     setPriceRange(catalogBounds);
+    setCurrentPage(1);
     router.replace(pathname, { scroll: false });
   }
 
@@ -164,6 +183,42 @@ function ProductsPageContent() {
 
     return sortProducts(result, sortKey);
   }, [allProducts, searchQuery, selectedCategory, selectedSubCategory, priceRange, sortKey, entryFilter]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredAndSortedProducts.length / PRODUCTS_PER_PAGE));
+  // Derived at render time rather than corrected via an effect: if a filter
+  // shrinks the result set out from under an out-of-range page, this simply
+  // renders the last valid page without an extra render/effect round-trip.
+  const safePage = Math.min(currentPage, totalPages);
+
+  const paginatedProducts = useMemo(
+    () =>
+      filteredAndSortedProducts.slice(
+        (safePage - 1) * PRODUCTS_PER_PAGE,
+        safePage * PRODUCTS_PER_PAGE
+      ),
+    [filteredAndSortedProducts, safePage]
+  );
+
+  // entryFilter (New Arrivals / Best Sellers / Sale) is driven by plain
+  // <Link> navigation from the header rather than one of the handlers
+  // above, so it's the one filter dimension that needs its own reset — skip
+  // the first run so a deep link like /products?onSale=true&page=2 still
+  // lands on the page it points to.
+  const skipInitialEntryFilterReset = useRef(true);
+  useEffect(() => {
+    if (skipInitialEntryFilterReset.current) {
+      skipInitialEntryFilterReset.current = false;
+      return;
+    }
+    setCurrentPage(1);
+    syncParams({ page: null });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [entryFilter]);
+
+  function handlePageChange(page) {
+    setCurrentPage(page);
+    syncParams({ page: page === 1 ? null : String(page) });
+  }
 
   return (
     <main className="flex-1 w-full bg-background min-h-screen pt-32 pb-24 selection:bg-primary selection:text-primary-foreground">
@@ -209,20 +264,7 @@ function ProductsPageContent() {
         {/* Product Grid / States */}
         <div className="min-h-[600px]">
           {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[clamp(2rem,5vw,4rem)]">
-              {[1, 2, 3, 4, 5, 6].map((n) => (
-                <div key={n} className="flex flex-col animate-pulse">
-                  <div className="aspect-[3/4] bg-muted mb-6 w-full" />
-                  <div className="flex justify-between items-start pt-2 px-1">
-                    <div className="flex flex-col gap-2 w-1/2">
-                      <div className="h-4 bg-muted w-full" />
-                      <div className="h-3 bg-muted w-1/2" />
-                    </div>
-                    <div className="h-4 bg-muted w-16" />
-                  </div>
-                </div>
-              ))}
-            </div>
+            <ProductCardSkeletonGrid count={6} />
           ) : filteredAndSortedProducts.length === 0 ? (
             <motion.div
               initial={{ opacity: 0 }}
@@ -243,13 +285,25 @@ function ProductsPageContent() {
               </button>
             </motion.div>
           ) : (
-            <motion.div layout className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[clamp(2rem,5vw,4rem)]">
-              <AnimatePresence mode="popLayout">
-                {filteredAndSortedProducts.map((product, index) => (
-                  <ProductCard key={product.id} product={product} index={index} />
-                ))}
-              </AnimatePresence>
-            </motion.div>
+            <>
+              <motion.div
+                layout
+                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[clamp(2rem,5vw,4rem)]"
+              >
+                <AnimatePresence mode="popLayout">
+                  {paginatedProducts.map((product, index) => (
+                    <ProductCard key={product.id} product={product} index={index} />
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+
+              <Pagination
+                currentPage={safePage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+                className="mt-[clamp(3rem,6vw,5rem)]"
+              />
+            </>
           )}
         </div>
       </div>
