@@ -14,6 +14,7 @@ export const SORT_OPTIONS = {
   RATING: "rating",
   PRICE_LOW: "price-low",
   PRICE_HIGH: "price-high",
+  DISCOUNT: "discount-high",
 };
 
 export const SORT_LABELS = {
@@ -22,6 +23,7 @@ export const SORT_LABELS = {
   [SORT_OPTIONS.RATING]: "Best Rating",
   [SORT_OPTIONS.PRICE_LOW]: "Price: Low to High",
   [SORT_OPTIONS.PRICE_HIGH]: "Price: High to Low",
+  [SORT_OPTIONS.DISCOUNT]: "Biggest Savings",
 };
 
 // ---------- Catalog access ----------
@@ -176,6 +178,8 @@ export function sortProducts(list, sortKey) {
       return sorted.sort((a, b) => getFinalPrice(a) - getFinalPrice(b));
     case SORT_OPTIONS.PRICE_HIGH:
       return sorted.sort((a, b) => getFinalPrice(b) - getFinalPrice(a));
+    case SORT_OPTIONS.DISCOUNT:
+      return sorted.sort((a, b) => b.discount - a.discount);
     case SORT_OPTIONS.NEWEST:
     default:
       return sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

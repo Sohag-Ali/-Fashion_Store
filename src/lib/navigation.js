@@ -11,7 +11,7 @@ export const mainNavLinks = [
   { label: "Shop", href: "/products", key: "shop", megaMenu: true },
   { label: "New Arrivals", href: "/products?newArrival=true", key: "new" },
   { label: "Best Sellers", href: "/products?bestSeller=true", key: "bestsellers" },
-  { label: "Sale", href: "/products?onSale=true", key: "sale", accent: true },
+  { label: "Sale", href: "/sale", key: "sale", accent: true },
 ];
 
 // Generated directly from src/data/categories.js — every column and every
