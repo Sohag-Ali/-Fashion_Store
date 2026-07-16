@@ -70,6 +70,99 @@ export function getBrands() {
   return [...new Set(productsData.map((product) => product.brand))].sort();
 }
 
+// ---------- Collections (derived — nothing below is a hardcoded name) ----------
+
+/** Most-recently-added product's image, used as a group's cover photo. */
+function coverImage(products) {
+  return [...products].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0]?.image;
+}
+
+/**
+ * Every distinct value of `product.collection` in the catalog, with a live
+ * count, cover image, and starting price — entirely derived from data, so a
+ * new collection added to src/data/products.js appears here automatically.
+ */
+export function getCollections() {
+  const groups = new Map();
+  productsData.forEach((product) => {
+    if (!product.collection) return;
+    if (!groups.has(product.collection)) groups.set(product.collection, []);
+    groups.get(product.collection).push(product);
+  });
+
+  return [...groups.entries()]
+    .map(([name, products]) => ({
+      name,
+      slug: encodeURIComponent(name),
+      href: `/products?collection=${encodeURIComponent(name)}`,
+      productCount: products.length,
+      featuredCount: products.filter((product) => product.featured).length,
+      priceFrom: Math.min(...products.map(getFinalPrice)),
+      image: coverImage(products),
+    }))
+    .sort((a, b) => b.productCount - a.productCount);
+}
+
+export function getCollectionByName(name) {
+  return getCollections().find((collection) => collection.name === name) ?? null;
+}
+
+/** Top collections by curated weight (how many featured pieces they carry), breadth as tiebreak. */
+export function getFeaturedCollections(count) {
+  const list = getCollections().sort(
+    (a, b) => b.featuredCount - a.featuredCount || b.productCount - a.productCount
+  );
+  return typeof count === "number" ? list.slice(0, count) : list;
+}
+
+/** Every distinct value of `product.season`, derived the same way as getCollections(). */
+export function getSeasons() {
+  const groups = new Map();
+  productsData.forEach((product) => {
+    if (!product.season) return;
+    if (!groups.has(product.season)) groups.set(product.season, []);
+    groups.get(product.season).push(product);
+  });
+
+  return [...groups.entries()]
+    .map(([name, products]) => ({
+      name,
+      href: `/products?season=${encodeURIComponent(name)}`,
+      productCount: products.length,
+      image: coverImage(products),
+    }))
+    .sort((a, b) => b.productCount - a.productCount);
+}
+
+// `gender` is a closed schema enum (men/women/unisex), not open-ended
+// business data, so labeling it here isn't "hardcoding a collection" — it's
+// the same kind of small display mapping as SORT_LABELS above.
+const LIFESTYLE_LABELS = {
+  men: "The Men's Edit",
+  women: "The Women's Edit",
+  unisex: "The Unisex Edit",
+};
+
+/** Audience-based edits derived from `product.gender`. */
+export function getLifestyleEdits() {
+  const groups = new Map();
+  productsData.forEach((product) => {
+    if (!product.gender) return;
+    if (!groups.has(product.gender)) groups.set(product.gender, []);
+    groups.get(product.gender).push(product);
+  });
+
+  return [...groups.entries()]
+    .map(([gender, products]) => ({
+      gender,
+      label: LIFESTYLE_LABELS[gender] ?? `The ${gender} Edit`,
+      href: `/products?gender=${encodeURIComponent(gender)}`,
+      productCount: products.length,
+      image: coverImage(products),
+    }))
+    .sort((a, b) => b.productCount - a.productCount);
+}
+
 // ---------- Curated slices ----------
 
 export function getFeaturedProducts(count) {
@@ -151,14 +244,19 @@ export function searchProducts(query, list = productsData) {
 }
 
 /**
- * Apply category/subCategory/price filters to a product list.
- * `category`/`subCategory` of "all" (or omitted) are treated as no-ops.
+ * Apply category/subCategory/collection/season/price filters to a product
+ * list. `category`/`subCategory` of "all" (or omitted) are treated as no-ops.
  */
-export function filterProducts(list, { category, subCategory, minPrice, maxPrice, gender } = {}) {
+export function filterProducts(
+  list,
+  { category, subCategory, minPrice, maxPrice, gender, collection, season } = {}
+) {
   return list.filter((product) => {
     if (category && category !== "all" && product.category !== category) return false;
     if (subCategory && subCategory !== "all" && product.subCategory !== subCategory) return false;
     if (gender && gender !== "all" && product.gender !== gender && product.gender !== "unisex") return false;
+    if (collection && product.collection !== collection) return false;
+    if (season && product.season !== season) return false;
 
     const finalPrice = getFinalPrice(product);
     if (typeof minPrice === "number" && finalPrice < minPrice) return false;

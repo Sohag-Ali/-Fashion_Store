@@ -10,7 +10,7 @@ export const mainNavLinks = [
   { label: "Home", href: "/" },
   { label: "Shop", href: "/products", key: "shop", megaMenu: true },
   { label: "New Arrivals", href: "/products?newArrival=true", key: "new" },
-  { label: "Best Sellers", href: "/products?bestSeller=true", key: "bestsellers" },
+  { label: "Collections", href: "/collections", key: "collections" },
   { label: "Sale", href: "/sale", key: "sale", accent: true },
 ];
 

@@ -3,7 +3,7 @@
 import React, { Suspense, useState, useMemo, useEffect, useRef } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { SlidersHorizontal } from "lucide-react";
+import { SlidersHorizontal, X } from "lucide-react";
 import {
   getAllProducts,
   getCategories,
@@ -64,6 +64,15 @@ function ProductsPageContent() {
         ? "sale"
         : null;
 
+  // Entry-point filters driven by the Collections page — a specific
+  // collection, season, or lifestyle (gender) edit. Also stay in effect
+  // until explicitly cleared, same as entryFilter above.
+  const collectionParam = searchParams.get("collection");
+  const seasonParam = searchParams.get("season");
+  const genderParam = searchParams.get("gender");
+  const activeCollectionLabel =
+    collectionParam ?? seasonParam ?? (genderParam ? `${genderParam[0].toUpperCase()}${genderParam.slice(1)}'s Edit` : null);
+
   const subCategories = useMemo(
     () => (selectedCategory !== "all" ? getSubCategories(selectedCategory) : []),
     [selectedCategory]
@@ -80,11 +89,13 @@ function ProductsPageContent() {
         ? "Best Sellers"
         : entryFilter === "sale"
           ? "On Sale"
-          : activeSubCategory
-            ? activeSubCategory.name
-            : activeCategory
-              ? activeCategory.name
-              : "The Collection";
+          : activeCollectionLabel
+            ? activeCollectionLabel
+            : activeSubCategory
+              ? activeSubCategory.name
+              : activeCategory
+                ? activeCategory.name
+                : "The Collection";
 
   function syncParams(next) {
     const params = new URLSearchParams(searchParams.toString());
@@ -155,7 +166,12 @@ function ProductsPageContent() {
     sortKey !== SORT_OPTIONS.NEWEST ||
     priceRange.min !== catalogBounds.min ||
     priceRange.max !== catalogBounds.max ||
-    entryFilter !== null;
+    entryFilter !== null ||
+    activeCollectionLabel !== null;
+
+  function handleClearCollectionEntry() {
+    syncParams({ collection: null, season: null, gender: null, page: null });
+  }
 
   // Simulate network request
   useEffect(() => {
@@ -171,6 +187,9 @@ function ProductsPageContent() {
       subCategory: selectedSubCategory,
       minPrice: priceRange.min,
       maxPrice: priceRange.max,
+      collection: collectionParam,
+      season: seasonParam,
+      gender: genderParam,
     });
 
     if (entryFilter === "new") {
@@ -182,7 +201,18 @@ function ProductsPageContent() {
     }
 
     return sortProducts(result, sortKey);
-  }, [allProducts, searchQuery, selectedCategory, selectedSubCategory, priceRange, sortKey, entryFilter]);
+  }, [
+    allProducts,
+    searchQuery,
+    selectedCategory,
+    selectedSubCategory,
+    priceRange,
+    sortKey,
+    entryFilter,
+    collectionParam,
+    seasonParam,
+    genderParam,
+  ]);
 
   const totalPages = Math.max(1, Math.ceil(filteredAndSortedProducts.length / PRODUCTS_PER_PAGE));
   // Derived at render time rather than corrected via an effect: if a filter
@@ -199,11 +229,11 @@ function ProductsPageContent() {
     [filteredAndSortedProducts, safePage]
   );
 
-  // entryFilter (New Arrivals / Best Sellers / Sale) is driven by plain
-  // <Link> navigation from the header rather than one of the handlers
-  // above, so it's the one filter dimension that needs its own reset — skip
-  // the first run so a deep link like /products?onSale=true&page=2 still
-  // lands on the page it points to.
+  // entryFilter and the Collections-page params (collection/season/gender)
+  // are driven by plain <Link> navigation rather than one of the handlers
+  // above, so they're the filter dimensions that need their own reset —
+  // skip the first run so a deep link like /products?onSale=true&page=2
+  // still lands on the page it points to.
   const skipInitialEntryFilterReset = useRef(true);
   useEffect(() => {
     if (skipInitialEntryFilterReset.current) {
@@ -213,7 +243,7 @@ function ProductsPageContent() {
     setCurrentPage(1);
     syncParams({ page: null });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entryFilter]);
+  }, [entryFilter, collectionParam, seasonParam, genderParam]);
 
   function handlePageChange(page) {
     setCurrentPage(page);
@@ -241,6 +271,19 @@ function ProductsPageContent() {
           >
             {filteredAndSortedProducts.length} Pieces
           </motion.p>
+
+          {activeCollectionLabel && (
+            <motion.button
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              onClick={handleClearCollectionEntry}
+              className="mt-6 inline-flex items-center gap-2 px-4 py-2 border border-foreground/20 text-xs uppercase tracking-widest hover:border-foreground transition-colors duration-300"
+            >
+              Viewing: {activeCollectionLabel}
+              <X size={12} strokeWidth={1.5} />
+            </motion.button>
+          )}
         </div>
 
         <ShopFilters
