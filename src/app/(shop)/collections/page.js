@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "@/components/layout/Footer";
-import ProductGrid from "@/components/ui/ProductGrid";
+import ProductGrid from "@/components/product/ProductGrid";
 import { CollectionsHero } from "@/components/collections/CollectionsHero";
 import { FeaturedCollections } from "@/components/collections/FeaturedCollections";
 import { EditorialBanner } from "@/components/collections/EditorialBanner";

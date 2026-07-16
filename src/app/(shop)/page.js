@@ -1,11 +1,11 @@
 import React from "react";
-import HeroSection from "@/components/ui/HeroSection";
-import Categories from "@/components/ui/Categories";
-import ProductGrid from "@/components/ui/ProductGrid";
-import WhyChooseUs from "@/components/ui/WhyChooseUs";
-import FeaturedProducts from "@/components/ui/FeaturedProducts";
-import Testimonials from "@/components/ui/Testimonials";
-import Newsletter from "@/components/ui/Newsletter";
+import HeroSection from "@/components/home/HeroSection";
+import Categories from "@/components/home/Categories";
+import ProductGrid from "@/components/product/ProductGrid";
+import WhyChooseUs from "@/components/home/WhyChooseUs";
+import FeaturedProducts from "@/components/home/FeaturedProducts";
+import Testimonials from "@/components/home/Testimonials";
+import Newsletter from "@/components/home/Newsletter";
 import Footer from "@/components/layout/Footer";
 import { getNewArrivals, getBestSellers } from "@/lib/products";
 
