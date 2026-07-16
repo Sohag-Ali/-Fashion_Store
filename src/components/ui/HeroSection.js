@@ -118,7 +118,7 @@ export default function HeroSection() {
          className="absolute bottom-6 w-full px-6 flex justify-center lg:hidden z-30"
       >
          <FloatingCard 
-          image="https://images.unsplash.com/photo-1591557304169-2fb0d5a3501a?q=80&w=1000&auto=format&fit=crop"
+          image="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=80"
           title="Silk Evening Gown"
           price="$1,290"
           delay={1.2}

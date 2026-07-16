@@ -52,7 +52,7 @@ export default function FeaturedProducts() {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <Link
-              href="/products"
+              href="/products?category=shoes"
               className="inline-flex items-center gap-4 text-xs font-semibold tracking-[0.2em] uppercase pb-3 border-b border-white/30 hover:border-white transition-colors duration-500 group w-fit"
             >
               Explore Collection
