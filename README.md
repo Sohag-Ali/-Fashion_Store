@@ -1,4 +1,4 @@
-# Luxe – Premium Fashion E-commerce
+# Oxivos – Premium Fashion E-commerce
 
 A modern luxury fashion e-commerce frontend built with **Next.js 15**, **Tailwind CSS**, and **Framer Motion**. This project was developed as a frontend interview task, focusing on clean architecture, premium UI/UX, responsive design, and scalable component structure.
 
@@ -12,13 +12,13 @@ A modern luxury fashion e-commerce frontend built with **Next.js 15**, **Tailwin
 
 ## GitHub Repository
 
-🔗 [https://github.com/your-username/luxe-fashion](https://github.com/your-username/luxe-fashion)
+🔗 [https://github.com/your-username/Oxivos-fashion](https://github.com/your-username/Oxivos-fashion)
 
 ---
 
 ## Project Overview
 
-Luxe is a frontend-only fashion e-commerce application designed to simulate a real shopping experience using local dummy data. The application emphasizes elegant design, reusable components, and production-ready frontend architecture.
+Oxivos is a frontend-only fashion e-commerce application designed to simulate a real shopping experience using local dummy data. The application emphasizes elegant design, reusable components, and production-ready frontend architecture.
 
 The project includes:
 
@@ -141,7 +141,7 @@ src/
 Clone the repository
 
 ```bash
-git clone https://github.com/your-username/luxe-fashion.git
+git clone https://github.com/your-username/Oxivos-fashion.git
 ```
 
 Install dependencies

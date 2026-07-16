@@ -17,7 +17,7 @@ export default function Footer() {
               viewport={{ once: true }}
               className="font-serif text-4xl tracking-tighter mb-8 italic pr-4"
             >
-              Luxe.
+              Oxivos.
             </motion.div>
             <p className="text-sm text-white/50 leading-relaxed font-light">
               Elevated essentials for the modern wardrobe. Designed with extreme precision, crafted with uncompromising quality, and built for tomorrow.
@@ -49,7 +49,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-xs text-white/40 uppercase tracking-widest font-medium">
-          <p>&copy; {currentYear} Luxe. All rights reserved.</p>
+          <p>&copy; {currentYear} Oxivos. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <a href="#" className="hover:text-white transition-colors">Instagram</a>
             <a href="#" className="hover:text-white transition-colors">Pinterest</a>

@@ -16,24 +16,24 @@ const playfair = Playfair_Display({
 
 export const metadata = {
   title: {
-    template: "%s | Luxe Fashion",
-    default: "Luxe | Premium Fashion E-Commerce",
+    template: "%s | Oxivos Fashion",
+    default: "Oxivos | Premium Fashion E-Commerce",
   },
   description: "Discover a meticulously curated collection of perfectly tailored essentials. The ultimate destination for modern luxury fashion.",
   keywords: ["luxury", "fashion", "e-commerce", "clothing", "premium"],
-  authors: [{ name: "Luxe Team" }],
-  creator: "Luxe Fashion",
+  authors: [{ name: "Oxivos Team" }],
+  creator: "Oxivos Fashion",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://luxe-fashion.com",
-    title: "Luxe | Premium Fashion E-Commerce",
+    url: "https://Oxivos-fashion.com",
+    title: "Oxivos | Premium Fashion E-Commerce",
     description: "Discover a meticulously curated collection of perfectly tailored essentials.",
-    siteName: "Luxe Fashion",
+    siteName: "Oxivos Fashion",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Luxe | Premium Fashion E-Commerce",
+    title: "Oxivos | Premium Fashion E-Commerce",
     description: "Discover a meticulously curated collection of perfectly tailored essentials.",
   },
 };

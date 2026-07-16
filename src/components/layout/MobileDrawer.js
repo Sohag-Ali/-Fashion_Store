@@ -33,7 +33,7 @@ export function MobileDrawer({ isOpen, onClose, pathname, searchParams, wishlist
             className="fixed top-0 left-0 bottom-0 w-[85%] max-w-sm bg-background border-r border-border z-50 flex flex-col md:hidden shadow-luxury"
           >
             <div className="flex items-center justify-between p-6 border-b border-border">
-              <span className="font-serif text-2xl tracking-tighter italic">Luxe.</span>
+              <span className="font-serif text-2xl tracking-tighter italic">Oxivos.</span>
               <button
                 onClick={onClose}
                 className="p-2 -mr-2 text-foreground hover:text-muted-foreground transition-colors"

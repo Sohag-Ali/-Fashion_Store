@@ -185,9 +185,9 @@ export function SiteHeader() {
             <Link
               href="/"
               className="font-serif text-3xl tracking-tighter text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
-              aria-label="Luxe Home"
+              aria-label="Oxivos Home"
             >
-              Luxe.
+              Oxivos.
             </Link>
           </div>
 

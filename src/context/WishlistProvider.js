@@ -4,7 +4,7 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from "
 import { getFinalPrice } from "@/lib/products";
 
 const WishlistContext = createContext(null);
-const STORAGE_KEY = "luxe-wishlist";
+const STORAGE_KEY = "Oxivos-wishlist";
 
 export function WishlistProvider({ children }) {
   const [items, setItems] = useState([]);

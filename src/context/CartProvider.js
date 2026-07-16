@@ -4,7 +4,7 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from "
 import { getFinalPrice } from "@/lib/products";
 
 const CartContext = createContext(null);
-const STORAGE_KEY = "luxe-cart";
+const STORAGE_KEY = "Oxivos-cart";
 
 function lineKey(productId, size, color) {
   return [productId, size ?? "-", color ?? "-"].join("::");
