@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Tag, X, ArrowRight, Loader2 } from "lucide-react";
-import { getCoupon } from "@/lib/dummyData";
+import { getCoupon } from "@/lib/coupons";
 import { formatPrice } from "@/lib/utils";
 
 const FREE_SHIPPING_THRESHOLD = 200;

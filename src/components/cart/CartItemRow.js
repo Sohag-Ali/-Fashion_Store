@@ -18,18 +18,18 @@ export function CartItemRow({ item, onUpdateQuantity, onRemove }) {
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className="flex gap-5 sm:gap-8 py-8 border-b border-foreground/10"
     >
-      <Link href={`/products/${item.id}`} className="relative shrink-0 w-24 sm:w-32 aspect-[3/4] bg-muted overflow-hidden">
-        <Image src={item.image} alt={item.title} fill sizes="128px" className="object-cover" />
+      <Link href={`/products/${item.slug}`} className="relative shrink-0 w-24 sm:w-32 aspect-[3/4] bg-muted overflow-hidden">
+        <Image src={item.image} alt={item.name} fill sizes="128px" className="object-cover" />
       </Link>
 
       <div className="flex-1 flex flex-col justify-between min-w-0">
         <div className="flex items-start justify-between gap-4 mb-4">
           <div>
-            <Link href={`/products/${item.id}`} className="font-serif text-lg sm:text-xl tracking-tight hover:text-muted-foreground transition-colors">
-              {item.title}
+            <Link href={`/products/${item.slug}`} className="font-serif text-lg sm:text-xl tracking-tight hover:text-muted-foreground transition-colors">
+              {item.name}
             </Link>
             <p className="text-xs text-muted-foreground uppercase tracking-[0.15em] mt-2">
-              {item.category}
+              {item.brand}
             </p>
             <p className="text-xs text-muted-foreground mt-2 flex items-center gap-3">
               {item.color && <span>Color: {item.color}</span>}
@@ -38,7 +38,7 @@ export function CartItemRow({ item, onUpdateQuantity, onRemove }) {
           </div>
           <button
             onClick={() => onRemove(item.key)}
-            aria-label={`Remove ${item.title} from cart`}
+            aria-label={`Remove ${item.name} from cart`}
             className="p-2 -mr-2 -mt-2 text-muted-foreground hover:text-foreground transition-colors shrink-0"
           >
             <X size={16} strokeWidth={1.5} />

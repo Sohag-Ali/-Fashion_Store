@@ -1,29 +1,30 @@
 import { notFound } from "next/navigation";
-import { getProductById, getRelatedProducts, getReviewsForProduct } from "@/lib/dummyData";
+import { getProductBySlug, getRelatedProducts } from "@/lib/products";
+import { getReviewsForProduct } from "@/lib/reviews";
 import { ProductDetailsView } from "@/components/product/ProductDetailsView";
 
 export async function generateMetadata({ params }) {
-  const { id } = await params;
-  const product = getProductById(id);
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
 
   if (!product) {
     return { title: "Product Not Found" };
   }
 
   return {
-    title: product.title,
+    title: `${product.name} — ${product.brand}`,
     description: product.description,
     openGraph: {
-      title: product.title,
+      title: product.name,
       description: product.description,
-      images: [{ url: product.images[0] }],
+      images: [{ url: product.image }],
     },
   };
 }
 
 export default async function ProductDetailsPage({ params }) {
-  const { id } = await params;
-  const product = getProductById(id);
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
 
   if (!product) {
     notFound();

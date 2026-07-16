@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { getFinalPrice } from "@/lib/products";
 
 const CartContext = createContext(null);
 const STORAGE_KEY = "luxe-cart";
@@ -45,11 +46,12 @@ export function CartProvider({ children }) {
         {
           key,
           id: product.id,
-          title: product.title,
+          slug: product.slug,
+          name: product.name,
+          brand: product.brand,
           category: product.category,
           image: product.image,
-          price: product.price,
-          priceFormatted: product.priceFormatted,
+          price: getFinalPrice(product),
           stock: product.stock ?? 99,
           size,
           color,

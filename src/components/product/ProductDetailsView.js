@@ -16,18 +16,23 @@ import { ProductAccordion } from "@/components/product/ProductAccordion";
 import { ShippingInfo } from "@/components/product/ShippingInfo";
 import { ProductReviews } from "@/components/product/ProductReviews";
 import { RelatedProducts } from "@/components/product/RelatedProducts";
+import { getCategoryBySlug, getFinalPrice } from "@/lib/products";
+import { formatPrice } from "@/lib/utils";
 
 export function ProductDetailsView({ product, relatedProducts, reviews }) {
   const { addItem } = useCart();
   const { toggleItem, isWishlisted } = useWishlist();
-  const firstAvailableSize = product.sizes.find((size) => !product.soldOutSizes?.includes(size));
-  const [selectedSize, setSelectedSize] = useState(firstAvailableSize ?? product.sizes[0]);
+  const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name);
   const [quantity, setQuantity] = useState(1);
   const [addState, setAddState] = useState("idle"); // idle | adding | added
 
   const wishlisted = isWishlisted(product.id);
   const [showSizeWarning, setShowSizeWarning] = useState(false);
+
+  const category = getCategoryBySlug(product.category);
+  const finalPrice = getFinalPrice(product);
+  const hasDiscount = product.discount > 0;
 
   function handleAddToCart() {
     if (!selectedSize) {
@@ -43,6 +48,15 @@ export function ProductDetailsView({ product, relatedProducts, reviews }) {
     setTimeout(() => setAddState("idle"), 2400);
   }
 
+  const detailLines = [
+    `${product.brand} — ${product.collection} collection, ${product.season}`,
+    `Available in ${product.colors.length} ${product.colors.length === 1 ? "color" : "colors"}: ${product.colors
+      .map((color) => color.name)
+      .join(", ")}`,
+    "Dry clean or hand wash cold, depending on fabric",
+    `SKU ${product.sku}`,
+  ];
+
   const accordionItems = [
     {
       id: "details",
@@ -50,7 +64,7 @@ export function ProductDetailsView({ product, relatedProducts, reviews }) {
       icon: <Sparkles size={15} strokeWidth={1.5} />,
       content: (
         <ul className="flex flex-col gap-2">
-          {product.details.map((detail) => (
+          {detailLines.map((detail) => (
             <li key={detail} className="flex items-start gap-2">
               <span className="w-1 h-1 rounded-full bg-foreground/40 mt-2 shrink-0" />
               {detail}
@@ -79,9 +93,11 @@ export function ProductDetailsView({ product, relatedProducts, reviews }) {
         >
           <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
           <span>/</span>
-          <Link href="/products" className="hover:text-foreground transition-colors">{product.category}</Link>
+          <Link href={`/products?category=${product.category}`} className="hover:text-foreground transition-colors">
+            {category?.name ?? product.category}
+          </Link>
           <span>/</span>
-          <span className="text-foreground">{product.title}</span>
+          <span className="text-foreground">{product.name}</span>
         </motion.nav>
 
         {/* Main grid */}
@@ -91,7 +107,7 @@ export function ProductDetailsView({ product, relatedProducts, reviews }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <ProductGallery images={product.images} title={product.title} />
+            <ProductGallery images={product.gallery} title={product.name} />
           </motion.div>
 
           <motion.div
@@ -100,13 +116,14 @@ export function ProductDetailsView({ product, relatedProducts, reviews }) {
             transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col max-w-xl"
           >
-            {product.isNew && (
+            {product.newArrival && (
               <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
                 New Arrival
               </span>
             )}
+            <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">{product.brand}</span>
             <h1 className="text-[clamp(2.25rem,4vw,3.25rem)] font-serif tracking-tighter leading-[1.05] mb-4 text-balance">
-              {product.title}
+              {product.name}
             </h1>
 
             <div className="flex items-center gap-3 mb-6">
@@ -116,9 +133,19 @@ export function ProductDetailsView({ product, relatedProducts, reviews }) {
               </a>
             </div>
 
-            <p className="text-2xl font-medium tabular-nums tracking-wide mb-8">
-              {product.priceFormatted}
-            </p>
+            <div className="flex items-center gap-3 mb-8">
+              <p className="text-2xl font-medium tabular-nums tracking-wide">{formatPrice(finalPrice)}</p>
+              {hasDiscount && (
+                <>
+                  <p className="text-base text-muted-foreground line-through tabular-nums">
+                    {formatPrice(product.price)}
+                  </p>
+                  <span className="text-xs uppercase tracking-widest font-medium text-background bg-foreground px-2 py-1">
+                    -{product.discount}%
+                  </span>
+                </>
+              )}
+            </div>
 
             <p className="text-sm text-muted-foreground leading-relaxed mb-10">
               {product.description}
@@ -128,7 +155,6 @@ export function ProductDetailsView({ product, relatedProducts, reviews }) {
               <ColorSelector colors={product.colors} selected={selectedColor} onSelect={setSelectedColor} />
               <SizeSelector
                 sizes={product.sizes}
-                soldOutSizes={product.soldOutSizes}
                 selected={selectedSize}
                 onSelect={(size) => {
                   setSelectedSize(size);

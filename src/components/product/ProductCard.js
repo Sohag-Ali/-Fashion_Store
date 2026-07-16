@@ -7,7 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Check, Heart } from "lucide-react";
 import { useCart } from "@/context/CartProvider";
 import { useWishlist } from "@/context/WishlistProvider";
-import { cn } from "@/lib/utils";
+import { getFinalPrice } from "@/lib/products";
+import { cn, formatPrice } from "@/lib/utils";
 
 export function ProductCard({ product, size = "default", showQuickAdd = true, index = 0 }) {
   const { addItem } = useCart();
@@ -16,15 +17,16 @@ export function ProductCard({ product, size = "default", showQuickAdd = true, in
 
   const wishlisted = isWishlisted(product.id);
   const isCompact = size === "compact";
-  const isSoldOut = product.sizes?.every((s) => product.soldOutSizes?.includes(s));
+  const isSoldOut = product.stock === 0;
+  const finalPrice = getFinalPrice(product);
+  const hasDiscount = product.discount > 0;
 
   function handleQuickAdd(e) {
     e.preventDefault();
     e.stopPropagation();
     if (addState !== "idle" || isSoldOut) return;
 
-    const defaultSize =
-      product.sizes?.find((s) => !product.soldOutSizes?.includes(s)) ?? product.sizes?.[0];
+    const defaultSize = product.sizes?.[0];
     const defaultColor = product.colors?.[0]?.name;
 
     setAddState("adding");
@@ -51,20 +53,35 @@ export function ProductCard({ product, size = "default", showQuickAdd = true, in
       transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       className="group flex flex-col"
     >
-      <Link href={`/products/${product.id}`} className="cursor-pointer flex flex-col">
+      <Link href={`/products/${product.slug}`} className="cursor-pointer flex flex-col">
         <div className="aspect-[3/4] bg-muted relative overflow-hidden mb-6">
           <Image
             src={product.image}
-            alt={product.title}
+            alt={product.name}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             className="object-cover transition-transform duration-[1.5s] group-hover:scale-110 ease-out"
           />
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
+          {(hasDiscount || product.newArrival) && (
+            <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
+              {product.newArrival && (
+                <span className="px-2.5 py-1 bg-background/90 backdrop-blur-sm text-[10px] uppercase tracking-widest font-medium">
+                  New
+                </span>
+              )}
+              {hasDiscount && (
+                <span className="px-2.5 py-1 bg-foreground text-background text-[10px] uppercase tracking-widest font-medium">
+                  -{product.discount}%
+                </span>
+              )}
+            </div>
+          )}
+
           <button
             onClick={handleWishlistToggle}
-            aria-label={wishlisted ? `Remove ${product.title} from wishlist` : `Add ${product.title} to wishlist`}
+            aria-label={wishlisted ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
             aria-pressed={wishlisted}
             className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-background/80 backdrop-blur-sm text-foreground opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity duration-300 hover:bg-background z-10"
           >
@@ -122,7 +139,7 @@ export function ProductCard({ product, size = "default", showQuickAdd = true, in
                 isCompact ? "text-base md:text-lg" : "text-xl"
               )}
             >
-              {product.title}
+              {product.name}
             </h3>
             <p
               className={cn(
@@ -130,10 +147,15 @@ export function ProductCard({ product, size = "default", showQuickAdd = true, in
                 isCompact ? "text-[11px] mt-1.5" : "text-xs"
               )}
             >
-              {product.category}
+              {product.brand}
             </p>
           </div>
-          <p className="font-medium text-sm tabular-nums tracking-wider">{product.priceFormatted}</p>
+          <div className="flex flex-col items-end shrink-0 pl-3">
+            <p className="font-medium text-sm tabular-nums tracking-wider">{formatPrice(finalPrice)}</p>
+            {hasDiscount && (
+              <p className="text-xs text-muted-foreground line-through tabular-nums">{formatPrice(product.price)}</p>
+            )}
+          </div>
         </div>
       </Link>
     </motion.div>

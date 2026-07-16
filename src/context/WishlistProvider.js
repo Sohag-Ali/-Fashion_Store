@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { getFinalPrice } from "@/lib/products";
 
 const WishlistContext = createContext(null);
 const STORAGE_KEY = "luxe-wishlist";
@@ -28,11 +29,12 @@ export function WishlistProvider({ children }) {
   function toWishlistEntry(product) {
     return {
       id: product.id,
-      title: product.title,
+      slug: product.slug,
+      name: product.name,
+      brand: product.brand,
       category: product.category,
       image: product.image,
-      price: product.price,
-      priceFormatted: product.priceFormatted,
+      price: getFinalPrice(product),
     };
   }
 

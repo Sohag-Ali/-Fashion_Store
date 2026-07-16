@@ -7,10 +7,11 @@ import FeaturedProducts from "@/components/ui/FeaturedProducts";
 import Testimonials from "@/components/ui/Testimonials";
 import Newsletter from "@/components/ui/Newsletter";
 import Footer from "@/components/layout/Footer";
-import { productsData } from "@/lib/dummyData";
+import { getNewArrivals, getBestSellers } from "@/lib/products";
 
 export default function Home() {
-  const newArrivals = productsData.slice(0, 3);
+  const newArrivals = getNewArrivals(6);
+  const bestSellers = getBestSellers(3);
 
   return (
     <main className="flex-1 flex flex-col bg-background selection:bg-primary selection:text-primary-foreground">
@@ -20,11 +21,18 @@ export default function Home() {
         title="New Arrivals"
         subtitle="Latest Additions"
         products={newArrivals}
-        linkText="View All Pieces"
-        linkHref="/products"
+        linkText="View All New Arrivals"
+        linkHref="/products?newArrival=true"
       />
       <WhyChooseUs />
       <FeaturedProducts />
+      <ProductGrid
+        title="Best Sellers"
+        subtitle="Customer Favorites"
+        products={bestSellers}
+        linkText="View All Best Sellers"
+        linkHref="/products?bestSeller=true"
+      />
       <Testimonials />
       <Newsletter />
       <Footer />
