@@ -8,11 +8,11 @@ A modern luxury fashion e-commerce frontend built with **Next.js 15**, **Tailwin
 
 ## Live Demo
 
-🔗 Live Site: [https://your-live-url.vercel.app](https://your-live-url.vercel.app)
+🔗 Live Site: [Live Demo Link]( https://oxivos.vercel.app)
 
 ## GitHub Repository
 
-🔗 [https://github.com/your-username/Oxivos-fashion](https://github.com/your-username/Oxivos-fashion)
+🔗 [Github Repository Link](https://github.com/Sohag-Ali/-Fashion_Store.git)
 
 ---
 
