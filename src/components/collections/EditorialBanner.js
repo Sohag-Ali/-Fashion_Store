@@ -60,7 +60,7 @@ export function EditorialBanner({ image, eyebrow = "The Story", title, descripti
         >
           <Link
             href={href}
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-black text-xs font-semibold tracking-[0.2em] uppercase hover:bg-neutral-200 transition-colors duration-300"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground text-xs font-semibold tracking-[0.2em] uppercase hover:bg-primary-hover transition-colors duration-300 shadow-glow-primary"
           >
             {cta}
             <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform" />

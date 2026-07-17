@@ -124,13 +124,13 @@ export function SiteHeader() {
                     {isActive && (
                       <motion.div
                         layoutId="activeNavIndicator"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
                         initial={false}
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
                       />
                     )}
                     {!isActive && (
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-foreground transition-all duration-300 group-hover:w-full" />
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
                     )}
                   </Link>
                 );
@@ -166,13 +166,13 @@ export function SiteHeader() {
                     {isActive && (
                       <motion.div
                         layoutId="activeNavIndicator"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
                         initial={false}
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
                       />
                     )}
                     {!isActive && (
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-foreground transition-all duration-300 group-hover:w-full" />
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
                     )}
                   </Link>
                 </div>
@@ -184,7 +184,7 @@ export function SiteHeader() {
           <div className="flex-1 md:flex-none flex justify-center">
             <Link
               href="/"
-              className="font-serif text-3xl tracking-tighter text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
+              className="font-serif text-3xl tracking-tighter text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
               aria-label="Oxivos Home"
             >
               Oxivos.
@@ -195,7 +195,7 @@ export function SiteHeader() {
           <div className="flex-1 flex items-center justify-end gap-2 md:gap-4">
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="p-2 hidden md:flex text-foreground hover:text-muted-foreground transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-primary"
+              className="p-2 hidden md:flex text-foreground hover:text-muted-foreground transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-accent"
               aria-label="Search products"
             >
               <Search strokeWidth={1.5} size={20} />
@@ -203,7 +203,7 @@ export function SiteHeader() {
 
             <Link
               href="/wishlist"
-              className="p-2 relative hidden md:flex text-foreground hover:text-muted-foreground transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-primary"
+              className="p-2 relative hidden md:flex text-foreground hover:text-muted-foreground transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-accent"
               aria-label="Wishlist"
             >
               <Heart strokeWidth={1.5} size={20} />
@@ -215,7 +215,7 @@ export function SiteHeader() {
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
                     transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                    className="absolute top-1 right-1 w-4 h-4 bg-primary text-primary-foreground text-[9px] font-bold rounded-full flex items-center justify-center border border-background"
+                    className="absolute top-1 right-1 w-4 h-4 bg-rose text-rose-foreground text-[9px] font-bold rounded-full flex items-center justify-center border border-background"
                   >
                     {wishlistCount > 9 ? "9+" : wishlistCount}
                   </motion.span>
@@ -227,7 +227,7 @@ export function SiteHeader() {
 
             <Link
               href="/cart"
-              className="p-2 relative flex items-center text-foreground hover:text-muted-foreground transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-primary group"
+              className="p-2 relative flex items-center text-foreground hover:text-muted-foreground transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-accent group"
               aria-label="Shopping Cart"
             >
               <ShoppingBag strokeWidth={1.5} size={20} />

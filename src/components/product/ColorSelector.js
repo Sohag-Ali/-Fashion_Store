@@ -28,7 +28,7 @@ export function ColorSelector({ colors, selected, onSelect }) {
               <span
                 className={cn(
                   "absolute inset-0 rounded-full ring-1 ring-offset-2 ring-offset-background transition-all duration-200",
-                  isSelected ? "ring-foreground" : "ring-transparent"
+                  isSelected ? "ring-primary" : "ring-transparent"
                 )}
               />
               <span

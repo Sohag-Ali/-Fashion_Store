@@ -140,7 +140,7 @@ export function ProductDetailsView({ product, relatedProducts, reviews }) {
                   <p className="text-base text-muted-foreground line-through tabular-nums">
                     {formatPrice(product.price)}
                   </p>
-                  <span className="text-xs uppercase tracking-widest font-medium text-background bg-foreground px-2 py-1">
+                  <span className="text-xs uppercase tracking-widest font-medium text-rose-foreground bg-rose px-2 py-1">
                     -{product.discount}%
                   </span>
                 </>
@@ -170,7 +170,7 @@ export function ProductDetailsView({ product, relatedProducts, reviews }) {
                 whileTap={{ scale: 0.97 }}
                 animate={showSizeWarning ? { x: [0, -8, 8, -6, 6, 0] } : {}}
                 transition={showSizeWarning ? { duration: 0.5 } : { duration: 0.15 }}
-                className="relative flex-1 h-14 flex items-center justify-center gap-3 bg-foreground text-background text-xs font-semibold uppercase tracking-[0.15em] overflow-hidden disabled:opacity-60"
+                className="relative flex-1 h-14 flex items-center justify-center gap-3 bg-primary text-primary-foreground text-xs font-semibold uppercase tracking-[0.15em] overflow-hidden hover:bg-primary-hover transition-colors shadow-glow-primary disabled:opacity-60 disabled:shadow-none"
               >
                 <AnimatePresence mode="wait" initial={false}>
                   {addState === "idle" && (
@@ -198,7 +198,7 @@ export function ProductDetailsView({ product, relatedProducts, reviews }) {
                       <motion.span
                         animate={{ rotate: 360 }}
                         transition={{ duration: 0.6, repeat: Infinity, ease: "linear" }}
-                        className="w-3.5 h-3.5 border-2 border-background/40 border-t-background rounded-full"
+                        className="w-3.5 h-3.5 border-2 border-primary-foreground/40 border-t-primary-foreground rounded-full"
                       />
                       Adding
                     </motion.span>
@@ -223,13 +223,13 @@ export function ProductDetailsView({ product, relatedProducts, reviews }) {
                 onClick={() => toggleItem(product)}
                 aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
                 aria-pressed={wishlisted}
-                className="w-14 h-14 shrink-0 flex items-center justify-center border border-foreground/20 hover:border-foreground transition-colors duration-300"
+                className="w-14 h-14 shrink-0 flex items-center justify-center border border-foreground/20 hover:border-rose transition-colors duration-300"
               >
                 <motion.span animate={{ scale: wishlisted ? [1, 1.3, 1] : 1 }} transition={{ duration: 0.35 }}>
                   <Heart
                     size={18}
                     strokeWidth={1.5}
-                    className={wishlisted ? "fill-foreground text-foreground" : "text-foreground"}
+                    className={wishlisted ? "fill-rose text-rose" : "text-foreground"}
                   />
                 </motion.span>
               </button>

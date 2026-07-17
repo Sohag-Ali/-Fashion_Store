@@ -30,10 +30,16 @@ export function SaleHero({ productCount, maxDiscount, scrollTargetId }) {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[70vh] min-h-[520px] bg-neutral-950 flex flex-col items-center justify-center overflow-hidden"
+      className="relative w-full h-[70vh] min-h-[520px] bg-ink flex flex-col items-center justify-center overflow-hidden"
     >
       <motion.div style={{ scale }} className="absolute inset-0 w-full h-full origin-bottom">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/85 z-10" />
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            backgroundImage:
+              "linear-gradient(135deg, rgba(236,72,153,0.35) 0%, rgba(245,158,11,0.22) 100%), linear-gradient(to bottom, rgba(11,17,32,0.55), rgba(11,17,32,0.4), rgba(11,17,32,0.85))",
+          }}
+        />
         <Image
           src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2400&auto=format&fit=crop"
           alt="Sale edit"
@@ -84,10 +90,10 @@ export function SaleHero({ productCount, maxDiscount, scrollTargetId }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="group mt-12 flex items-center gap-3 px-8 py-4 bg-white text-black text-xs font-semibold tracking-[0.2em] uppercase rounded-full transition-transform hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.25)]"
+          className="group mt-12 flex items-center gap-3 px-8 py-4 bg-rose text-rose-foreground text-xs font-semibold tracking-[0.2em] uppercase rounded-full transition-all hover:scale-105 hover:bg-rose-hover active:scale-95 shadow-glow-rose"
         >
           Shop the Sale
-          <span className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center group-hover:translate-y-0.5 transition-transform">
+          <span className="w-8 h-8 rounded-full bg-rose-foreground text-rose flex items-center justify-center group-hover:translate-y-0.5 transition-transform">
             <ArrowDown size={14} strokeWidth={1.5} />
           </span>
         </motion.button>

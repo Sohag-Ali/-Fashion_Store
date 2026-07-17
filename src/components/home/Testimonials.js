@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function Testimonials() {
   return (
-    <section className="w-full bg-neutral-100 dark:bg-neutral-900 py-[clamp(6rem,12vw,10rem)] overflow-hidden">
+    <section className="w-full bg-surface py-[clamp(6rem,12vw,10rem)] overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

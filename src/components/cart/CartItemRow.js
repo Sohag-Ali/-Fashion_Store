@@ -25,7 +25,7 @@ export function CartItemRow({ item, onUpdateQuantity, onRemove }) {
       <div className="flex-1 flex flex-col justify-between min-w-0">
         <div className="flex items-start justify-between gap-4 mb-4">
           <div>
-            <Link href={`/products/${item.slug}`} className="font-serif text-lg sm:text-xl tracking-tight hover:text-muted-foreground transition-colors">
+            <Link href={`/products/${item.slug}`} className="font-serif text-lg sm:text-xl tracking-tight hover:text-primary transition-colors">
               {item.name}
             </Link>
             <p className="text-xs text-muted-foreground uppercase tracking-[0.15em] mt-2">
@@ -39,7 +39,7 @@ export function CartItemRow({ item, onUpdateQuantity, onRemove }) {
           <button
             onClick={() => onRemove(item.key)}
             aria-label={`Remove ${item.name} from cart`}
-            className="p-2 -mr-2 -mt-2 text-muted-foreground hover:text-foreground transition-colors shrink-0"
+            className="p-2 -mr-2 -mt-2 text-muted-foreground hover:text-rose transition-colors shrink-0"
           >
             <X size={16} strokeWidth={1.5} />
           </button>

@@ -48,7 +48,7 @@ export function SearchOverlay({ isOpen, onClose }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[60]"
+            className="fixed inset-0 bg-overlay/65 backdrop-blur-sm z-[60]"
             onClick={onClose}
           />
           <motion.div
@@ -59,7 +59,7 @@ export function SearchOverlay({ isOpen, onClose }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -24 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-0 left-0 right-0 z-[70] bg-background border-b border-border shadow-luxury"
+            className="fixed top-0 left-0 right-0 z-[70] bg-popover border-b border-border shadow-luxury"
           >
             <div className="w-full max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 pt-8 pb-12">
               <div className="flex items-center justify-between mb-8">
@@ -75,7 +75,7 @@ export function SearchOverlay({ isOpen, onClose }) {
                 </button>
               </div>
 
-              <form onSubmit={handleSubmit} className="flex items-center gap-4 border-b border-foreground/20 pb-4 focus-within:border-foreground transition-colors">
+              <form onSubmit={handleSubmit} className="flex items-center gap-4 border-b border-foreground/20 pb-4 focus-within:border-primary transition-colors">
                 <Search strokeWidth={1.5} size={24} className="text-muted-foreground shrink-0" />
                 <input
                   ref={inputRef}
@@ -95,7 +95,7 @@ export function SearchOverlay({ isOpen, onClose }) {
                   <button
                     key={term}
                     onClick={() => goToQuery(term)}
-                    className="text-xs uppercase tracking-[0.1em] px-4 py-2 border border-border hover:border-foreground hover:bg-foreground hover:text-background transition-colors duration-300"
+                    className="text-xs uppercase tracking-[0.1em] px-4 py-2 border border-border hover:border-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
                   >
                     {term}
                   </button>

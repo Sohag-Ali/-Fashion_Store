@@ -19,7 +19,7 @@ export function CollectionCard({ href, title, subtitle, image, index = 0, classN
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.8, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className={cn("relative group overflow-hidden bg-neutral-100 dark:bg-neutral-900", className)}
+      className={cn("relative group overflow-hidden bg-muted", className)}
     >
       <Link href={href} className="absolute inset-0">
         {image && (

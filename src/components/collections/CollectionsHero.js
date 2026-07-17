@@ -29,10 +29,16 @@ export function CollectionsHero({ collectionCount, productCount, scrollTargetId 
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[85vh] min-h-[600px] bg-neutral-950 flex flex-col items-center justify-center overflow-hidden"
+      className="relative w-full h-[85vh] min-h-[600px] bg-ink flex flex-col items-center justify-center overflow-hidden"
     >
       <motion.div style={{ scale }} className="absolute inset-0 w-full h-full origin-bottom">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/85 z-10" />
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            backgroundImage:
+              "var(--gradient-hero-glow), linear-gradient(to bottom, rgba(11,17,32,0.55), rgba(11,17,32,0.35), rgba(11,17,32,0.86))",
+          }}
+        />
         <Image
           src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2400&auto=format&fit=crop"
           alt="The Collections"
@@ -84,10 +90,10 @@ export function CollectionsHero({ collectionCount, productCount, scrollTargetId 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="group mt-12 flex items-center gap-3 px-8 py-4 bg-white text-black text-xs font-semibold tracking-[0.2em] uppercase rounded-full transition-transform hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.25)]"
+          className="group mt-12 flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground text-xs font-semibold tracking-[0.2em] uppercase rounded-full transition-all hover:scale-105 hover:bg-primary-hover active:scale-95 shadow-glow-primary"
         >
           Explore
-          <span className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center group-hover:translate-y-0.5 transition-transform">
+          <span className="w-8 h-8 rounded-full bg-primary-foreground text-primary flex items-center justify-center group-hover:translate-y-0.5 transition-transform">
             <ArrowDown size={14} strokeWidth={1.5} />
           </span>
         </motion.button>

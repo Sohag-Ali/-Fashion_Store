@@ -1,36 +1,133 @@
 @import "tailwindcss";
 
 @theme {
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-  
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-surface: var(--surface);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* Royal Indigo — primary brand color. All primary CTAs, active/selected
+     states, and the cart badge. Hovers into Premium Purple by design. */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+
+  /* Premium Purple — the indigo's hover/gradient partner, and the fill for
+     secondary (less-emphasized) actions. */
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
+
+  /* Luxury Cyan — the single "informational" hue: keyboard focus rings,
+     links, the "New" badge, and info states. Never used for alarm/error. */
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-active: var(--accent-active);
+
+  --color-info: var(--accent);
+  --color-info-foreground: var(--accent-foreground);
+
+  /* Rose Pink — reserved for exactly two things: the wishlist/favorited
+     state and sale/error emphasis. Doubles as "danger" since the palette
+     has no dedicated red; rose reads urgent without being a raw #f00. */
+  --color-rose: var(--rose);
+  --color-rose-foreground: var(--rose-foreground);
+  --color-rose-hover: var(--rose-hover);
+
+  --color-destructive: var(--rose);
+  --color-destructive-foreground: var(--rose-foreground);
+  --color-danger: var(--rose);
+  --color-danger-foreground: var(--rose-foreground);
+
+  /* Premium Gold — badges and "special" moments only: star ratings,
+     bestseller/limited callouts, warning states. Never a button fill. */
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-gold-hover: var(--gold-hover);
+
+  --color-warning: var(--gold);
+  --color-warning-foreground: var(--gold-foreground);
+
+  /* Success borrows a teal a step away from accent-cyan so a confirmation
+     state is never confused with a focus ring or info hint. */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-badge: var(--muted);
+  --color-badge-foreground: var(--muted-foreground);
+
+  --color-skeleton: var(--skeleton);
+  --color-skeleton-highlight: var(--skeleton-highlight);
+
+  --color-divider: var(--divider);
+  --color-overlay: var(--overlay);
+
+  --color-navbar: var(--background);
+  --color-navbar-foreground: var(--foreground);
+  --color-navbar-border: var(--border);
+
+  --color-footer: var(--ink);
+  --color-footer-foreground: var(--paper);
+  --color-footer-muted: color-mix(in srgb, var(--paper) 60%, transparent);
+  --color-footer-border: color-mix(in srgb, var(--paper) 12%, transparent);
+
+  --color-dropdown: var(--popover);
+  --color-dropdown-foreground: var(--popover-foreground);
+  --color-dropdown-border: var(--border);
+
+  --color-modal: var(--popover);
+  --color-modal-foreground: var(--popover-foreground);
+  --color-modal-border: var(--border);
+
+  --color-tooltip: var(--foreground);
+  --color-tooltip-foreground: var(--background);
+
+  /* Fixed dark/light pair for full-bleed editorial sections (hero, footer)
+     that stay on-brand-dark regardless of the light/dark toggle. Values are
+     reused straight from Dark Background / Dark Text — no new hues. */
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--paper);
+  --color-ink-hover: var(--ink-hover);
+  --color-paper: var(--paper);
+  --color-paper-foreground: var(--ink);
+  --color-paper-hover: var(--paper-hover);
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
-  
+
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  /* Apple-inspired multi-layered shadow */
-  --shadow-luxury: 0px 4px 24px -1px rgba(0, 0, 0, 0.04), 0px 2px 8px -1px rgba(0, 0, 0, 0.04);
+  --shadow-xs: var(--shadow-xs-value);
+  --shadow-sm: var(--shadow-sm-value);
+  --shadow-card: var(--shadow-card-value);
+  --shadow-card-hover: var(--shadow-card-hover-value);
+  --shadow-dropdown: var(--shadow-dropdown-value);
+  --shadow-modal: var(--shadow-modal-value);
+  --shadow-tooltip: var(--shadow-tooltip-value);
+  --shadow-luxury: var(--shadow-luxury-value);
+
+  /* Colored "glow" shadows for premium micro-interactions — hover states on
+     filled CTAs and badges. Same brand hue as the fill, never neutral. */
+  --shadow-glow-primary: var(--shadow-glow-primary-value);
+  --shadow-glow-accent: var(--shadow-glow-accent-value);
+  --shadow-glow-rose: var(--shadow-glow-rose-value);
+  --shadow-glow-gold: var(--shadow-glow-gold-value);
 
   --animate-shimmer: shimmer 2.2s ease-in-out infinite;
 }
@@ -46,77 +143,180 @@
 
 @layer base {
   :root {
-    /* Apple Light Mode - Avoiding Halation */
-    /* Extremely subtle warm gray background instead of pure white */
-    --background: 0 0% 98%; 
-    /* Soft black for text, easier on eyes */
-    --foreground: 0 0% 11%;
-    
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 11%;
-    
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 11%;
-    
-    /* Primary is soft black */
-    --primary: 0 0% 11%; 
-    --primary-foreground: 0 0% 100%;
-    
-    --secondary: 0 0% 96%; 
-    --secondary-foreground: 0 0% 11%;
-    
-    /* Apple gray */
-    --muted: 240 5% 96%; 
-    --muted-foreground: 240 4% 46%;
-    
-    --accent: 0 0% 96%; 
-    --accent-foreground: 0 0% 11%;
-    
-    --destructive: 0 84.2% 60.2%; 
-    --destructive-foreground: 0 0% 100%;
-    
-    /* Delicate borders */
-    --border: 0 0% 90%; 
-    --input: 0 0% 90%;
-    
-    --ring: 0 0% 11%;
-    
-    /* Subtle squircle base */
+    /* ---------------------------------------------------------------- */
+    /* LIGHT THEME — Indigo / Purple / Cyan / Rose / Gold on a near-white  */
+    /* slate base. Every accent hue is reserved for one job (see @theme    */
+    /* comments above) so nothing reads as decorative or random.          */
+    /* ---------------------------------------------------------------- */
+
+    --background: #FAFAFC;
+    --foreground: #111827;
+
+    /* A whisper of indigo (indigo-50) instead of flat gray — alternating
+       sections stay on-brand instead of looking like an unstyled default. */
+    --surface: #EEF2FF;
+
+    --card: #FFFFFF;
+    --card-foreground: #111827;
+
+    --popover: #FFFFFF;
+    --popover-foreground: #111827;
+
+    --primary: #4F46E5;
+    --primary-foreground: #F8FAFC;
+    --primary-hover: #8B5CF6;
+    --primary-active: #4338CA;
+
+    --secondary: #8B5CF6;
+    --secondary-foreground: #FFFFFF;
+    --secondary-hover: #7C3AED;
+
+    --accent: #06B6D4;
+    /* Cyan is light enough (L≈43%) that white text on a cyan fill fails AA
+       (~2.4:1) — dark ink text is what actually passes (~7.3:1). */
+    --accent-foreground: #111827;
+    --accent-hover: #0891B2;
+    --accent-active: #0E7490;
+
+    --rose: #EC4899;
+    --rose-foreground: #111827;
+    --rose-hover: #DB2777;
+
+    --gold: #F59E0B;
+    --gold-foreground: #111827;
+    --gold-hover: #D97706;
+
+    --success: #0D9488;
+    --success-foreground: #FFFFFF;
+
+    --muted: #F1F5F9;
+    --muted-foreground: #64748B;
+
+    --border: #E5E7EB;
+    --input: #D1D5DB;
+
+    --ring: #06B6D4;
+
+    --skeleton: #EBEEF3;
+    --skeleton-highlight: #F8FAFC;
+
+    --divider: #E5E7EB;
+    --overlay: #0B1120;
+
+    --ink: #0B1120;
+    --ink-hover: #111827;
+    --paper: #F8FAFC;
+    --paper-hover: #E5E7EB;
+
     --radius: 0.25rem;
+
+    --shadow-xs-value: 0 1px 2px rgba(17, 24, 39, 0.04);
+    --shadow-sm-value: 0 1px 3px rgba(17, 24, 39, 0.08), 0 1px 2px rgba(17, 24, 39, 0.05);
+    --shadow-card-value: 0 1px 2px rgba(17, 24, 39, 0.03), 0 4px 14px -2px rgba(17, 24, 39, 0.07);
+    --shadow-card-hover-value: 0 12px 28px -6px rgba(17, 24, 39, 0.12), 0 2px 8px -2px rgba(17, 24, 39, 0.06);
+    --shadow-dropdown-value: 0 14px 34px -8px rgba(17, 24, 39, 0.16), 0 4px 12px -4px rgba(17, 24, 39, 0.08);
+    --shadow-modal-value: 0 26px 64px -12px rgba(17, 24, 39, 0.24), 0 8px 24px -8px rgba(17, 24, 39, 0.12);
+    --shadow-tooltip-value: 0 4px 12px -2px rgba(17, 24, 39, 0.2);
+    --shadow-luxury-value: 0px 4px 24px -1px rgba(17, 24, 39, 0.06), 0px 2px 8px -1px rgba(17, 24, 39, 0.05);
+
+    --shadow-glow-primary-value: 0 10px 30px -8px rgba(79, 70, 229, 0.45);
+    --shadow-glow-accent-value: 0 10px 26px -8px rgba(6, 182, 212, 0.4);
+    --shadow-glow-rose-value: 0 10px 26px -8px rgba(236, 72, 153, 0.4);
+    --shadow-glow-gold-value: 0 10px 26px -8px rgba(245, 158, 11, 0.4);
+
+    --gradient-brand: linear-gradient(135deg, #4F46E5 0%, #8B5CF6 55%, #06B6D4 100%);
+    --gradient-sale: linear-gradient(135deg, #EC4899 0%, #F59E0B 100%);
+    --gradient-hero-glow:
+      radial-gradient(ellipse 60% 50% at 18% 20%, rgba(79, 70, 229, 0.28), transparent 60%),
+      radial-gradient(ellipse 55% 45% at 82% 28%, rgba(236, 72, 153, 0.18), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 50% 92%, rgba(6, 182, 212, 0.2), transparent 60%);
   }
 
   .dark {
-    /* Pure OLED Black for backgrounds */
-    --background: 0 0% 0%; 
-    /* Soft white for text */
-    --foreground: 0 0% 96%;
-    
-    /* Slightly elevated surface */
-    --card: 240 5% 11%;
-    --card-foreground: 0 0% 96%;
-    
-    --popover: 240 5% 11%;
-    --popover-foreground: 0 0% 96%;
-    
-    --primary: 0 0% 96%; 
-    --primary-foreground: 0 0% 11%;
-    
-    --secondary: 240 5% 16%; 
-    --secondary-foreground: 0 0% 96%;
-    
-    --muted: 240 5% 16%;
-    --muted-foreground: 240 5% 65%;
-    
-    --accent: 240 5% 16%;
-    --accent-foreground: 0 0% 96%;
-    
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 100%;
-    
-    --border: 240 5% 16%;
-    --input: 240 5% 16%;
-    
-    --ring: 0 0% 96%;
+    /* ---------------------------------------------------------------- */
+    /* DARK THEME — handcrafted, not inverted. Same five brand hues, one   */
+    /* Tailwind step brighter (400 instead of 500/600) so they stay        */
+    /* legible on a near-black base, plus a visible glow per the brief.    */
+    /* ---------------------------------------------------------------- */
+
+    --background: #0B1120;
+    --foreground: #F8FAFC;
+
+    --surface: #111827;
+
+    --card: #1E293B;
+    --card-foreground: #F8FAFC;
+
+    --popover: #243244;
+    --popover-foreground: #F8FAFC;
+
+    --primary: #6366F1;
+    --primary-foreground: #F8FAFC;
+    --primary-hover: #A78BFA;
+    --primary-active: #818CF8;
+
+    --secondary: #A78BFA;
+    --secondary-foreground: #0B1120;
+    --secondary-hover: #C4B5FD;
+
+    --accent: #22D3EE;
+    --accent-foreground: #0B1120;
+    --accent-hover: #67E8F9;
+    --accent-active: #06B6D4;
+
+    --rose: #F472B6;
+    --rose-foreground: #0B1120;
+    --rose-hover: #F9A8D4;
+
+    --gold: #FBBF24;
+    --gold-foreground: #0B1120;
+    --gold-hover: #FCD34D;
+
+    --success: #2DD4BF;
+    --success-foreground: #0B1120;
+
+    --muted: #172136;
+    --muted-foreground: #94A3B8;
+
+    --border: #334155;
+    --input: #475569;
+
+    --ring: #22D3EE;
+
+    --skeleton: #172136;
+    --skeleton-highlight: #243449;
+
+    --divider: #263349;
+    --overlay: #05070D;
+
+    /* --ink / --paper intentionally not redeclared — the editorial sections
+       are already the darkest surface in the system in either theme. */
+
+    /* Black shadows barely read against a near-black surface, so dark
+       elevation leans on depth (bigger blur/spread, higher opacity) plus a
+       hairline top highlight, instead of an inverted light shadow. */
+    --shadow-xs-value: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-sm-value: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-card-value: 0 1px 0 rgba(148, 163, 184, 0.06) inset, 0 4px 16px -2px rgba(0, 0, 0, 0.55);
+    --shadow-card-hover-value: 0 1px 0 rgba(148, 163, 184, 0.08) inset, 0 14px 34px -4px rgba(0, 0, 0, 0.65);
+    --shadow-dropdown-value: 0 1px 0 rgba(148, 163, 184, 0.07) inset, 0 18px 42px -8px rgba(0, 0, 0, 0.7);
+    --shadow-modal-value: 0 1px 0 rgba(148, 163, 184, 0.08) inset, 0 32px 80px -12px rgba(0, 0, 0, 0.8);
+    --shadow-tooltip-value: 0 6px 18px -2px rgba(0, 0, 0, 0.6);
+    --shadow-luxury-value: 0 1px 0 rgba(148, 163, 184, 0.06) inset, 0px 4px 24px -1px rgba(0, 0, 0, 0.5), 0px 2px 10px -1px rgba(0, 0, 0, 0.4);
+
+    /* Stronger, more saturated glow in dark mode — "buttons and gradients
+       should glow slightly" reads as a real halo against near-black. */
+    --shadow-glow-primary-value: 0 0 32px -4px rgba(99, 102, 241, 0.65), 0 8px 24px -6px rgba(99, 102, 241, 0.4);
+    --shadow-glow-accent-value: 0 0 28px -4px rgba(34, 211, 238, 0.6), 0 8px 22px -6px rgba(34, 211, 238, 0.35);
+    --shadow-glow-rose-value: 0 0 28px -4px rgba(244, 114, 182, 0.6), 0 8px 22px -6px rgba(244, 114, 182, 0.35);
+    --shadow-glow-gold-value: 0 0 28px -4px rgba(251, 191, 36, 0.6), 0 8px 22px -6px rgba(251, 191, 36, 0.35);
+
+    --gradient-brand: linear-gradient(135deg, #6366F1 0%, #A78BFA 55%, #22D3EE 100%);
+    --gradient-sale: linear-gradient(135deg, #F472B6 0%, #FBBF24 100%);
+    --gradient-hero-glow:
+      radial-gradient(ellipse 60% 50% at 18% 20%, rgba(99, 102, 241, 0.4), transparent 60%),
+      radial-gradient(ellipse 55% 45% at 82% 28%, rgba(244, 114, 182, 0.26), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 50% 92%, rgba(34, 211, 238, 0.3), transparent 60%);
   }
 }
 
@@ -139,10 +339,10 @@
   .shimmer {
     background-image: linear-gradient(
       100deg,
-      hsl(var(--muted)) 20%,
-      hsl(var(--muted-foreground) / 0.16) 40%,
-      hsl(var(--muted-foreground) / 0.16) 60%,
-      hsl(var(--muted)) 80%
+      var(--skeleton) 20%,
+      var(--skeleton-highlight) 40%,
+      var(--skeleton-highlight) 60%,
+      var(--skeleton) 80%
     );
     background-size: 250% 100%;
     animation: var(--animate-shimmer);
@@ -156,4 +356,22 @@
     font-size: clamp(2rem, 5vw, 4rem);
     line-height: 1.2;
   }
+
+  /* Premium gradient system — indigo → purple → cyan brand sweep, and a
+     rose → gold sale variant. Applied as backgrounds or clipped to text. */
+  .bg-gradient-brand {
+    background-image: var(--gradient-brand);
+  }
+  .bg-gradient-sale {
+    background-image: var(--gradient-sale);
+  }
+  .text-gradient-brand {
+    background-image: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-hero-glow {
+    background-image: var(--gradient-hero-glow);
+   }
 }

@@ -11,7 +11,7 @@ export function StarRating({ rating = 0, size = 14, className }) {
           <span key={i} className="relative inline-flex" style={{ width: size, height: size }}>
             <Star strokeWidth={1.5} size={size} className="absolute inset-0 text-muted-foreground/40" />
             <span className="absolute inset-0 overflow-hidden" style={{ width: `${fill * 100}%` }}>
-              <Star strokeWidth={1.5} size={size} className="text-foreground fill-foreground" />
+              <Star strokeWidth={1.5} size={size} className="text-gold fill-gold" />
             </span>
           </span>
         );

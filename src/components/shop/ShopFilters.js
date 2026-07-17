@@ -95,14 +95,14 @@ export function ShopFilters({
           <label htmlFor="product-search" className="sr-only">
             Search products
           </label>
-          <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-foreground transition-colors" />
+          <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
           <input
             id="product-search"
             type="text"
             placeholder="Search pieces..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full bg-transparent border-b border-foreground/20 py-2 pl-8 pr-4 text-sm focus:outline-none focus:border-foreground transition-colors"
+            className="w-full bg-transparent border-b border-foreground/20 py-2 pl-8 pr-4 text-sm focus:outline-none focus:border-primary transition-colors"
           />
         </div>
 
@@ -113,8 +113,8 @@ export function ShopFilters({
             className={cn(
               "flex items-center gap-2 border px-5 py-2.5 text-xs uppercase tracking-widest transition-colors duration-300",
               isPriceOpen || priceRange.min !== priceBounds.min || priceRange.max !== priceBounds.max
-                ? "border-foreground text-foreground"
-                : "border-foreground/20 text-muted-foreground hover:border-foreground/50"
+                ? "border-primary text-primary"
+                : "border-foreground/20 text-muted-foreground hover:border-primary/50"
             )}
           >
             <SlidersHorizontal size={14} strokeWidth={1.5} />
@@ -127,7 +127,7 @@ export function ShopFilters({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="absolute left-0 top-full mt-2 w-64 border border-foreground/10 bg-background p-5 shadow-luxury z-50"
+                className="absolute left-0 top-full mt-2 w-64 border border-foreground/10 bg-popover p-5 shadow-luxury z-50"
               >
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-xs uppercase tracking-widest font-medium">Price Range</span>
@@ -167,7 +167,7 @@ export function ShopFilters({
           <select
             value={sortKey}
             onChange={(e) => onSortChange(e.target.value)}
-            className="w-full sm:w-auto appearance-none bg-background border border-foreground/20 px-6 py-2.5 pr-12 text-xs uppercase tracking-widest cursor-pointer focus:outline-none focus:border-foreground transition-colors hover:border-foreground/50 rounded-none"
+            className="w-full sm:w-auto appearance-none bg-background border border-foreground/20 px-6 py-2.5 pr-12 text-xs uppercase tracking-widest cursor-pointer focus:outline-none focus:border-primary transition-colors hover:border-primary/50 rounded-none"
           >
             {SORT_ORDER.map((key) => (
               <option key={key} value={key}>
@@ -175,7 +175,7 @@ export function ShopFilters({
               </option>
             ))}
           </select>
-          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-muted-foreground group-hover:text-foreground transition-colors" />
+          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-muted-foreground group-hover:text-primary transition-colors" />
         </div>
 
         {hasActiveFilters && (
@@ -199,8 +199,8 @@ function CategoryPill({ label, active, onClick, subtle }) {
         "whitespace-nowrap transition-all duration-300 pb-1",
         subtle ? "text-[11px] tracking-[0.12em] uppercase" : "text-xs uppercase tracking-[0.15em]",
         active
-          ? "text-foreground font-semibold border-b border-foreground"
-          : "text-muted-foreground hover:text-foreground"
+          ? "text-primary font-semibold border-b border-primary"
+          : "text-muted-foreground hover:text-primary"
       )}
     >
       {label}
@@ -221,7 +221,7 @@ function PriceInput({ label, value, bound, onCommit }) {
         onChange={(e) => setDraft(e.target.value)}
         onBlur={() => onCommit(Number(draft) || bound)}
         onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()}
-        className="w-full bg-transparent border-b border-foreground/20 py-1 text-sm focus:outline-none focus:border-foreground transition-colors tabular-nums"
+        className="w-full bg-transparent border-b border-foreground/20 py-1 text-sm focus:outline-none focus:border-primary transition-colors tabular-nums"
       />
     </label>
   );

@@ -22,7 +22,7 @@ export function EmptyCart() {
       </p>
       <Link
         href="/products"
-        className="px-8 py-3 border border-foreground text-xs uppercase tracking-widest hover:bg-foreground hover:text-background transition-colors duration-300"
+        className="px-8 py-3 border border-primary text-primary text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
       >
         Continue Shopping
       </Link>

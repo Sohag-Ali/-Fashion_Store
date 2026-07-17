@@ -21,14 +21,20 @@ export default function HeroSection() {
   return (
     <section 
       ref={containerRef}
-      className="relative w-full h-[100vh] bg-neutral-950 flex flex-col items-center justify-center overflow-hidden"
+      className="relative w-full h-[100vh] bg-ink flex flex-col items-center justify-center overflow-hidden"
     >
       {/* Background with Parallax */}
       <motion.div 
         style={{ scale }}
         className="absolute inset-0 w-full h-full origin-bottom"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 z-10" />
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            backgroundImage:
+              "var(--gradient-hero-glow), linear-gradient(to bottom, rgba(11,17,32,0.45), transparent, rgba(11,17,32,0.82))",
+          }}
+        />
         <Image
           src="https://images.unsplash.com/photo-1509319117193-57bab727e09d?q=80&w=2400&auto=format&fit=crop"
           alt="Luxury Fashion Hero"
@@ -77,15 +83,15 @@ export default function HeroSection() {
         >
           <Link
             href="/products"
-            className="group relative px-8 py-5 bg-white text-black rounded-full overflow-hidden flex items-center gap-4 transition-transform hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.3)]"
+            className="group relative px-8 py-5 bg-primary text-primary-foreground rounded-full overflow-hidden flex items-center gap-4 transition-all hover:scale-105 active:scale-95 shadow-glow-primary"
           >
             <span className="relative z-10 text-xs font-semibold tracking-[0.2em] uppercase">
               Discover Collection
             </span>
-            <div className="relative z-10 w-10 h-10 rounded-full bg-black text-white flex items-center justify-center group-hover:bg-neutral-800 transition-colors">
+            <div className="relative z-10 w-10 h-10 rounded-full bg-primary-foreground text-primary flex items-center justify-center transition-colors">
               <ArrowRight size={18} />
             </div>
-            <div className="absolute inset-0 bg-neutral-200 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+            <div className="absolute inset-0 bg-primary-hover transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
           </Link>
         </motion.div>
       </motion.div>
@@ -174,7 +180,7 @@ function FloatingCard({ image, title, price, delay, offset = "", fullWidth = fal
           <span className="text-white font-serif text-base tracking-wide">{title}</span>
           <span className="text-white/60 text-xs font-semibold tracking-[0.1em] mt-1.5 uppercase">{price}</span>
         </div>
-        <div className="ml-auto w-8 h-8 rounded-full border border-white/20 flex items-center justify-center mr-2 group-hover:bg-white group-hover:text-black transition-colors duration-300">
+        <div className="ml-auto w-8 h-8 rounded-full border border-white/20 flex items-center justify-center mr-2 group-hover:bg-accent group-hover:text-accent-foreground group-hover:border-accent transition-colors duration-300">
            <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
         </div>
       </Link>

@@ -24,8 +24,8 @@ export function SizeSelector({ sizes, soldOutSizes = [], selected, onSelect }) {
               className={cn(
                 "relative min-w-[3rem] px-4 py-2.5 text-sm border transition-all duration-200",
                 isSelected
-                  ? "border-foreground bg-foreground text-background"
-                  : "border-foreground/20 hover:border-foreground text-foreground",
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-foreground/20 hover:border-primary text-foreground",
                 isSoldOut && "border-foreground/10 text-muted-foreground/50 cursor-not-allowed hover:border-foreground/10"
               )}
             >

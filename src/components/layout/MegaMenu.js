@@ -36,7 +36,7 @@ export function MegaMenu({ isOpen, onClose, onMouseEnter, onMouseLeave, id, trig
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute left-0 right-0 top-full border-t border-border/60 bg-background/95 backdrop-blur-xl shadow-luxury"
+          className="absolute left-0 right-0 top-full border-t border-border/60 bg-popover/95 backdrop-blur-xl shadow-luxury"
         >
           <div className="w-full max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 py-12 grid grid-cols-12 gap-x-8 gap-y-10">
             {/* Category columns */}
@@ -47,7 +47,7 @@ export function MegaMenu({ isOpen, onClose, onMouseEnter, onMouseLeave, id, trig
                     <Link
                       href={column.href}
                       onClick={onClose}
-                      className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground w-fit pb-1 border-b border-transparent hover:border-foreground transition-colors duration-300"
+                      className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground w-fit pb-1 border-b border-transparent hover:border-primary hover:text-primary transition-colors duration-300"
                     >
                       {column.title}
                     </Link>
@@ -63,7 +63,7 @@ export function MegaMenu({ isOpen, onClose, onMouseEnter, onMouseLeave, id, trig
                           <Link
                             href={item.href}
                             onClick={onClose}
-                            className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+                            className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
                           >
                             {item.label}
                           </Link>

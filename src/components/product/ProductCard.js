@@ -68,12 +68,12 @@ export function ProductCard({ product, size = "default", showQuickAdd = true, in
           {(hasDiscount || product.newArrival) && (
             <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
               {product.newArrival && (
-                <span className="px-2.5 py-1 bg-background/90 backdrop-blur-sm text-[10px] uppercase tracking-widest font-medium">
+                <span className="px-2.5 py-1 bg-background/90 backdrop-blur-sm text-accent border border-accent/25 text-[10px] uppercase tracking-widest font-medium">
                   New
                 </span>
               )}
               {hasDiscount && (
-                <span className="px-2.5 py-1 bg-foreground text-background text-[10px] uppercase tracking-widest font-medium">
+                <span className="px-2.5 py-1 bg-rose text-rose-foreground text-[10px] uppercase tracking-widest font-medium">
                   -{product.discount}%
                 </span>
               )}
@@ -89,7 +89,7 @@ export function ProductCard({ product, size = "default", showQuickAdd = true, in
             <Heart
               size={16}
               strokeWidth={1.5}
-              className={wishlisted ? "fill-foreground text-foreground" : "text-foreground"}
+              className={wishlisted ? "fill-rose text-rose" : "text-foreground"}
             />
           </button>
 
@@ -97,7 +97,7 @@ export function ProductCard({ product, size = "default", showQuickAdd = true, in
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
               <button
                 onClick={handleQuickAdd}
-                className="relative px-8 py-3 bg-white text-black text-xs font-semibold tracking-widest uppercase rounded-full hover:bg-black hover:text-white transition-colors duration-300 shadow-xl min-w-[120px] flex items-center justify-center gap-2"
+                className="relative px-8 py-3 bg-primary text-primary-foreground text-xs font-semibold tracking-widest uppercase rounded-full hover:bg-primary-hover transition-colors duration-300 shadow-glow-primary min-w-[120px] flex items-center justify-center gap-2"
               >
                 <AnimatePresence mode="wait" initial={false}>
                   {addState === "idle" && (
@@ -111,7 +111,7 @@ export function ProductCard({ product, size = "default", showQuickAdd = true, in
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      className="w-3.5 h-3.5 border-2 border-black/30 border-t-black rounded-full animate-spin"
+                      className="w-3.5 h-3.5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin"
                     />
                   )}
                   {addState === "added" && (
@@ -136,7 +136,7 @@ export function ProductCard({ product, size = "default", showQuickAdd = true, in
           <div className="flex flex-col">
             <h3
               className={cn(
-                "font-serif tracking-tight group-hover:text-black/70 dark:group-hover:text-white/70 transition-colors",
+                "font-serif tracking-tight group-hover:text-primary transition-colors",
                 isCompact ? "text-base md:text-lg" : "text-xl"
               )}
             >

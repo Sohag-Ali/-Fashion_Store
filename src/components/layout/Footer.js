@@ -7,7 +7,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-neutral-950 text-white pt-24 pb-12 border-t border-white/10">
+    <footer className="w-full bg-ink text-paper pt-24 pb-12 border-t border-white/10">
       <div className="max-w-[1600px] mx-auto px-6">
         <div className="flex flex-col lg:flex-row justify-between items-start gap-16 mb-24">
           <div className="max-w-sm">
@@ -51,9 +51,9 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-xs text-white/40 uppercase tracking-widest font-medium">
           <p>&copy; {currentYear} Oxivos. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">Instagram</a>
-            <a href="#" className="hover:text-white transition-colors">Pinterest</a>
-            <a href="#" className="hover:text-white transition-colors">Twitter</a>
+            <a href="#" className="hover:text-accent transition-colors">Instagram</a>
+            <a href="#" className="hover:text-accent transition-colors">Pinterest</a>
+            <a href="#" className="hover:text-accent transition-colors">Twitter</a>
           </div>
         </div>
       </div>
@@ -65,10 +65,10 @@ function FooterLink({ href, children }) {
   return (
     <a 
       href={href} 
-      className="text-white/50 hover:text-white transition-colors duration-300 relative group w-fit"
+      className="text-white/50 hover:text-accent transition-colors duration-300 relative group w-fit"
     >
       {children}
-      <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full" />
+      <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full" />
     </a>
   );
 }

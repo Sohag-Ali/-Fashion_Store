@@ -44,7 +44,7 @@ function CategoryBlock({ category, colSpan, index }) {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative group overflow-hidden ${colSpan} bg-neutral-100 dark:bg-neutral-900`}
+      className={`relative group overflow-hidden ${colSpan} bg-muted`}
     >
       <Link href={`/products?category=${category.slug}`} className="absolute inset-0">
         <Image

@@ -15,7 +15,7 @@ export default function FeaturedProducts() {
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
-    <section ref={containerRef} className="w-full bg-neutral-900 text-white overflow-hidden py-32 relative">
+    <section ref={containerRef} className="w-full bg-ink text-paper overflow-hidden py-32 relative">
       <div className="max-w-[1600px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div className="flex flex-col z-10 relative">
           <motion.span 
@@ -53,7 +53,7 @@ export default function FeaturedProducts() {
           >
             <Link
               href="/products?category=shoes"
-              className="inline-flex items-center gap-4 text-xs font-semibold tracking-[0.2em] uppercase pb-3 border-b border-white/30 hover:border-white transition-colors duration-500 group w-fit"
+              className="inline-flex items-center gap-4 text-xs font-semibold tracking-[0.2em] uppercase pb-3 border-b border-white/30 hover:border-accent hover:text-accent transition-colors duration-500 group w-fit"
             >
               Explore Collection
               <span className="group-hover:translate-x-2 transition-transform duration-500 ease-out">→</span>
@@ -80,7 +80,7 @@ export default function FeaturedProducts() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute left-0 bottom-12 lg:bottom-24 w-[50%] h-[40%] bg-neutral-800 p-2 shadow-2xl border border-white/10"
+            className="absolute left-0 bottom-12 lg:bottom-24 w-[50%] h-[40%] bg-ink-hover p-2 shadow-2xl border border-white/10"
           >
             <Image
               src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1974&auto=format&fit=crop"

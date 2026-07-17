@@ -10,7 +10,7 @@ export function SeasonalCollections() {
   if (seasons.length === 0) return null;
 
   return (
-    <section className="w-full px-4 md:px-6 py-[clamp(4rem,10vw,8rem)] max-w-[1800px] mx-auto bg-secondary/40">
+    <section className="w-full px-4 md:px-6 py-[clamp(4rem,10vw,8rem)] max-w-[1800px] mx-auto bg-surface">
       <SectionHeading
         eyebrow="Shop By Season"
         title="Seasonal Collections"

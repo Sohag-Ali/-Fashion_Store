@@ -22,7 +22,7 @@ export function MobileDrawer({ isOpen, onClose, pathname, searchParams, wishlist
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 md:hidden"
+            className="fixed inset-0 bg-overlay/65 backdrop-blur-sm z-40 md:hidden"
             onClick={onClose}
           />
           <motion.div
@@ -67,7 +67,7 @@ export function MobileDrawer({ isOpen, onClose, pathname, searchParams, wishlist
                         onClick={onClose}
                         className={cn(
                           "flex items-center py-4 text-base font-medium uppercase tracking-wider border-b border-border transition-colors",
-                          active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+                          active ? "text-primary" : "text-muted-foreground hover:text-foreground",
                           link.accent && "text-destructive"
                         )}
                       >
@@ -85,7 +85,7 @@ export function MobileDrawer({ isOpen, onClose, pathname, searchParams, wishlist
                           onClick={onClose}
                           className={cn(
                             "flex-1 py-4 text-base font-medium uppercase tracking-wider transition-colors",
-                            active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                            active ? "text-primary" : "text-muted-foreground hover:text-foreground"
                           )}
                         >
                           {link.label}
@@ -159,7 +159,7 @@ export function MobileDrawer({ isOpen, onClose, pathname, searchParams, wishlist
               <Link
                 href="/wishlist"
                 onClick={onClose}
-                className="flex items-center gap-4 py-4 mt-2 text-sm font-medium uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+                className="flex items-center gap-4 py-4 mt-2 text-sm font-medium uppercase tracking-widest text-muted-foreground hover:text-rose transition-colors"
               >
                 <Heart strokeWidth={1.5} size={18} />
                 Wishlist

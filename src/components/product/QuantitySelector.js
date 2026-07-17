@@ -17,7 +17,7 @@ export function QuantitySelector({ quantity, onChange, max = 10, showLabel = tru
           onClick={() => onChange(Math.max(1, quantity - 1))}
           disabled={quantity <= 1}
           aria-label="Decrease quantity"
-          className={`${buttonSize} flex items-center justify-center text-foreground hover:bg-secondary disabled:opacity-30 disabled:hover:bg-transparent transition-colors`}
+          className={`${buttonSize} flex items-center justify-center text-foreground hover:bg-secondary/10 disabled:opacity-30 disabled:hover:bg-transparent transition-colors`}
         >
           <Minus size={14} strokeWidth={1.5} />
         </button>
@@ -26,7 +26,7 @@ export function QuantitySelector({ quantity, onChange, max = 10, showLabel = tru
           onClick={() => onChange(Math.min(max, quantity + 1))}
           disabled={quantity >= max}
           aria-label="Increase quantity"
-          className={`${buttonSize} flex items-center justify-center text-foreground hover:bg-secondary disabled:opacity-30 disabled:hover:bg-transparent transition-colors`}
+          className={`${buttonSize} flex items-center justify-center text-foreground hover:bg-secondary/10 disabled:opacity-30 disabled:hover:bg-transparent transition-colors`}
         >
           <Plus size={14} strokeWidth={1.5} />
         </button>

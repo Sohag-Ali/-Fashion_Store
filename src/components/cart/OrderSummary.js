@@ -92,7 +92,7 @@ export function OrderSummary({ subtotal, itemCount, onCheckoutSuccess }) {
           <label htmlFor="coupon-code" className="sr-only">
             Coupon code
           </label>
-          <div className="flex items-stretch border border-foreground/20 focus-within:border-foreground transition-colors">
+          <div className="flex items-stretch border border-foreground/20 focus-within:border-primary transition-colors">
             <input
               id="coupon-code"
               type="text"
@@ -107,7 +107,7 @@ export function OrderSummary({ subtotal, itemCount, onCheckoutSuccess }) {
             <button
               type="submit"
               disabled={!couponInput.trim()}
-              className="px-5 text-xs uppercase tracking-widest font-medium text-foreground hover:bg-secondary disabled:opacity-30 disabled:hover:bg-transparent transition-colors shrink-0"
+              className="px-5 text-xs uppercase tracking-widest font-medium text-foreground hover:bg-secondary/10 disabled:opacity-30 disabled:hover:bg-transparent transition-colors shrink-0"
             >
               Apply
             </button>
@@ -136,7 +136,7 @@ export function OrderSummary({ subtotal, itemCount, onCheckoutSuccess }) {
         onClick={handleCheckout}
         whileTap={{ scale: 0.98 }}
         disabled={checkoutState !== "idle"}
-        className="relative w-full h-14 flex items-center justify-center gap-3 bg-foreground text-background text-xs font-semibold uppercase tracking-[0.15em] overflow-hidden disabled:cursor-default"
+        className="relative w-full h-14 flex items-center justify-center gap-3 bg-primary text-primary-foreground text-xs font-semibold uppercase tracking-[0.15em] overflow-hidden hover:bg-primary-hover transition-colors shadow-glow-primary disabled:cursor-default disabled:shadow-none"
       >
         <AnimatePresence mode="wait" initial={false}>
           {checkoutState === "idle" && (

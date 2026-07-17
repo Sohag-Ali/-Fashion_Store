@@ -81,7 +81,7 @@ export function Pagination({
           "flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 shrink-0 border border-foreground/15 text-foreground transition-all duration-300",
           currentPage === 1
             ? "opacity-30 cursor-not-allowed"
-            : "hover:border-foreground hover:bg-foreground hover:text-background"
+            : "hover:border-primary hover:bg-primary hover:text-primary-foreground"
         )}
       >
         <ChevronLeft size={16} strokeWidth={1.5} />
@@ -98,13 +98,13 @@ export function Pagination({
                 aria-current={page === currentPage ? "page" : undefined}
                 className={cn(
                   "relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center text-sm tabular-nums transition-colors duration-300",
-                  page === currentPage ? "text-background" : "text-foreground hover:text-muted-foreground"
+                  page === currentPage ? "text-primary-foreground" : "text-foreground hover:text-primary"
                 )}
               >
                 {page === currentPage && (
                   <motion.span
                     layoutId="paginationActiveIndicator"
-                    className="absolute inset-0 bg-foreground"
+                    className="absolute inset-0 bg-primary"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
@@ -132,7 +132,7 @@ export function Pagination({
           "flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 shrink-0 border border-foreground/15 text-foreground transition-all duration-300",
           currentPage === totalPages
             ? "opacity-30 cursor-not-allowed"
-            : "hover:border-foreground hover:bg-foreground hover:text-background"
+            : "hover:border-primary hover:bg-primary hover:text-primary-foreground"
         )}
       >
         <ChevronRight size={16} strokeWidth={1.5} />
