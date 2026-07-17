@@ -88,16 +88,21 @@ export function SiteHeader() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
           isScrolled
-            ? "bg-background/70 backdrop-blur-md border-border/50 py-3 shadow-sm"
-            : "bg-transparent border-transparent py-5"
+            ? "bg-background/85 backdrop-blur-md border-border/60 py-3 shadow-sm"
+            : "bg-background/25 backdrop-blur-md border-transparent py-5"
         )}
       >
-        <Container className="flex items-center justify-between">
+        <Container
+          className={cn(
+            "flex items-center justify-between transition-[filter] duration-300",
+            !isScrolled && "drop-shadow-[0_1px_3px_rgba(0,0,0,0.45)]"
+          )}
+        >
           {/* Mobile Menu Toggle */}
           <div className="flex-1 md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="p-2 -ml-2 text-foreground hover:text-muted-foreground transition-colors"
+              className="p-2 -ml-2 text-foreground hover:text-primary transition-colors"
               aria-label="Open menu"
             >
               <Menu strokeWidth={1.5} size={24} />
@@ -116,8 +121,8 @@ export function SiteHeader() {
                     href={link.href}
                     className={cn(
                       "text-sm font-medium uppercase tracking-widest transition-colors duration-300 relative group py-2",
-                      isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
-                      link.accent && !isActive && "text-destructive/80 hover:text-destructive"
+                      isActive ? "text-primary" : "text-foreground/75 hover:text-foreground",
+                      link.accent && !isActive && "text-destructive hover:text-rose-hover"
                     )}
                   >
                     {link.label}
@@ -154,7 +159,7 @@ export function SiteHeader() {
                     onKeyDown={(e) => handleTriggerKeyDown(e, link.key)}
                     className={cn(
                       "flex items-center gap-1.5 text-sm font-medium uppercase tracking-widest transition-colors duration-300 relative group py-2",
-                      isActive || menuOpen ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                      isActive || menuOpen ? "text-primary" : "text-foreground/75 hover:text-foreground"
                     )}
                   >
                     {link.label}
@@ -195,7 +200,7 @@ export function SiteHeader() {
           <div className="flex-1 flex items-center justify-end gap-2 md:gap-4">
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="p-2 hidden md:flex text-foreground hover:text-muted-foreground transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-accent"
+              className="p-2 hidden md:flex text-foreground hover:text-primary transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-accent"
               aria-label="Search products"
             >
               <Search strokeWidth={1.5} size={20} />
@@ -203,7 +208,7 @@ export function SiteHeader() {
 
             <Link
               href="/wishlist"
-              className="p-2 relative hidden md:flex text-foreground hover:text-muted-foreground transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-accent"
+              className="p-2 relative hidden md:flex text-foreground hover:text-rose transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-accent"
               aria-label="Wishlist"
             >
               <Heart strokeWidth={1.5} size={20} />
@@ -227,7 +232,7 @@ export function SiteHeader() {
 
             <Link
               href="/cart"
-              className="p-2 relative flex items-center text-foreground hover:text-muted-foreground transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-accent group"
+              className="p-2 relative flex items-center text-foreground hover:text-primary transition-colors rounded-full focus-visible:ring-2 focus-visible:ring-accent group"
               aria-label="Shopping Cart"
             >
               <ShoppingBag strokeWidth={1.5} size={20} />
